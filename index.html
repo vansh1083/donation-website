@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Global Relief • Donate for Life</title>
+  <style>
+    :root{
+      --accent:#0376c6;
+      --accent-dark:#025ea6;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --bg:linear-gradient(180deg,#f3f7fb 0%, #eef6fb 100%);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#07203a;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit}
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 18px;
+      background:#fff;
+      box-shadow:0 2px 10px rgba(2,44,76,0.04);
+      position:sticky; top:0; z-index:60;
+    }
+    .brand{font-weight:800; color:var(--accent); font-size:18px}
+    .nav{display:flex; gap:12px; align-items:center}
+    .btn{background:var(--accent); color:#fff; padding:10px 14px; border-radius:10px; text-decoration:none; font-weight:700; display:inline-block}
+    .container{max-width:980px; margin:24px auto; padding:0 16px}
+
+    /* HERO */
+    .hero{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      background-image:
+        linear-gradient(180deg, rgba(3,118,198,0.48), rgba(3,118,198,0.18)),
+        url('https://images.unsplash.com/photo-1506812574058-fc75fa93fead?auto=format&fit=crop&w=1500&q=60');
+      background-size:cover;
+      background-position:center;
+      border-radius:14px;
+      color:#fff;
+      padding:36px 22px;
+      min-height:260px;
+      box-shadow:0 8px 30px rgba(2,118,198,0.08);
+    }
+    .hero .left{flex:1; min-width:260px}
+    .hero h1{margin:0;font-size:26px;line-height:1.05}
+    .hero p{margin:12px 0 0;color:rgba(255,255,255,0.95); max-width:720px}
+    .hero .cta{margin-top:16px}
+
+    /* Impact + counter */
+    .stats {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-top:12px;
+    }
+    .stat-card{
+      background:rgba(255,255,255,0.08);
+      padding:10px 12px;
+      border-radius:10px;
+      min-width:120px;
+      text-align:left;
+    }
+    .stat-card .num{font-weight:800; font-size:20px}
+    .stat-card .label{font-size:12px; color:rgba(255,255,255,0.9)}
+
+    /* SECTIONS */
+    .section{margin-top:28px}
+    .section h2{color:var(--accent); margin:0 0 12px; font-size:22px}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+      margin-top:12px;
+    }
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 6px 18px rgba(2,44,76,0.06);
+      display:flex;
+      flex-direction:column;
+    }
+    .card img{width:100%; height:160px; object-fit:cover; display:block}
+    .card .body{padding:14px; flex:1}
+    .card h3{margin:0 0 8px; font-size:18px}
+    .card p{margin:0; color:var(--muted); font-size:14px}
+    .card .foot{padding:14px; border-top:1px solid #f1f5f9; display:flex; justify-content:space-between; align-items:center}
+
+    /* Donate area */
+    .donate-panel{
+      margin-top:22px;
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+    }
+    .panel{
+      flex:1 1 320px;
+      background:var(--card);
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 6px 18px rgba(2,44,76,0.06);
+    }
+    .panel h4{margin:0 0 8px}
+    .muted{color:var(--muted); font-size:14px}
+
+    footer{
+      margin-top:40px;
+      padding:18px 0;
+      text-align:center;
+      color:#fff;
+      background:var(--accent);
+      border-top-left-radius:12px;
+      border-top-right-radius:12px;
+    }
+
+    /* popup styles */
+    .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,20,40,0.45);z-index:200;align-items:center;justify-content:center}
+    .modal{
+      width:94%;
+      max-width:520px;
+      background:#fff;border-radius:12px;padding:18px;box-shadow:0 12px 28px rgba(2,20,40,0.22);
+    }
+    .modal h3{margin:0 0 8px}
+    .form-row{display:flex;gap:8px;align-items:center}
+    .form-row input, .form-row select{flex:1;padding:10px;border-radius:8px;border:1px solid #e6eef7;font-size:15px}
+    .modal .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+    .secondary{background:#f1f5f9;color:#223;padding:9px 12px;border-radius:8px;border:none}
+
+    /* celebration pataka animation */
+    .celebrate-wrap{display:none;position:fixed;inset:0;z-index:1000;pointer-events:none}
+    .left-fire, .right-fire{
+      position:absolute; top:45%; width:160px; height:160px; transform-origin:center; opacity:0;
+      filter:drop-shadow(0 8px 18px rgba(0,0,0,0.25));
+    }
+    .center-blast{
+      position:absolute; left:50%; top:40%; transform:translate(-50%,-50%); width:260px;height:260px; opacity:0; pointer-events:none;
+    }
+    .celebrate-msg{
+      position:fixed; left:50%; top:58%; transform:translate(-50%,-50%); background:rgba(255,255,255,0.98); padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(2,20,40,0.18); text-align:center; z-index:1001; display:none;
+    }
+    .celebrate-msg h2{margin:0 0 6px}
+    .celebrate-msg p{margin:0;color:var(--muted)}
+
+    /* small responsive tweaks */
+    @media(max-width:640px){
+      .hero{padding:20px 14px; min-height:220px}
+      .hero h1{font-size:20px}
+      .center-blast{width:200px;height:200px}
+      .left-fire,.right-fire{width:120px;height:120px}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">Global Relief • Donate for Life</div>
+    <nav class="nav">
+      <a class="muted" href="#causes">Causes</a>
+      <a class="muted" href="#donate">Donate</a>
+      <a class="btn" href="#donate">Donate Now</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero" role="banner">
+      <div class="left">
+        <h1>Fast, transparent help for disasters, medical emergencies, and the environment</h1>
+        <p>When families lose everything — quick help matters. We plant trees, support medical care, and stand with those affected by incidents. Your small donation brings real hope today.</p>
+
+        <div class="stats">
+          <div class="stat-card">
+            <div style="font-size:12px;color:rgba(255,255,255,0.85)">Today's donors</div>
+            <div id="counterTop" class="num" style="color:#fff">5,200+</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.85)">Estimated supporters today</div>
+          </div>
+          <div style="margin-left:6px">
+            <a class="btn" href="#donate">Donate Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="min-width:260px; text-align:center">
+        <div style="background:rgba(255,255,255,0.06); padding:14px; border-radius:10px;">
+          <div style="font-weight:700; font-size:18px">Trusted</div>
+          <div class="muted" style="margin-top:6px">Transparent payouts • Verified campaigns</div>
+          <div style="margin-top:12px">
+            <div style="font-weight:700; font-size:20px">₹0</div>
+            <div class="muted" style="font-size:13px">raised (demo)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAUSES -->
+    <section id="causes" class="section">
+      <h2>What we support</h2>
+      <div class="grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1506169894395-36397e4aaee5?auto=format&fit=crop&w=900&q=60" alt="Disaster">
+          <div class="body">
+            <h3>Disaster Relief</h3>
+            <p>Emergency rescue, food, shelter and long-term rebuilding after earthquakes, floods and storms.</p>
+          </div>
+          <div class="foot"><span class="muted">Immediate help</span><a class="btn" href="#donate">Donate</a></div>
+        </div>
+
+        <div class="card">
+          <!-- Attack / incident image replaced with more relevant image -->
+          <img src="https://images.unsplash.com/photo-1581349480963-0f5501a0b8e2?auto=format&fit=crop&w=900&q=60" alt="Attack Incident">
+          <div class="body">
+            <h3>Attack & Incident Support</h3>
+            <p>Support for victims and families affected by violence, blasts, or other sudden incidents.</p>
+          </div>
+          <div class="foot"><span class="muted">Family aid</span><a class="btn" href="#donate">Donate</a></div>
+        </div>
+
+        <div class="card">
+          <!-- Tree cutting image (birds flying out) -->
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=60" alt="Tree cutting birds">
+          <div class="body">
+            <h3>Tree Plantation</h3>
+            <p>Planting and protecting trees to restore habitats, cool communities, and protect wildlife.</p>
+          </div>
+          <div class="foot"><span class="muted">Environment</span><a class="btn" href="#donate">Donate</a></div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1580281658629-82aea3c51e7b?auto=format&fit=crop&w=900&q=60" alt="Medical">
+          <div class="body">
+            <h3>Medical Emergencies</h3>
+            <p>Help patients with life-saving treatment when families cannot pay medical bills.</p>
+          </div>
+          <div class="foot"><span class="muted">Health</span><a class="btn" href="#donate">Donate</a></div>
+        </div>
+
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1493836512294-502baa1986e2?auto=format&fit=crop&w=900&q=60" alt="Family">
+          <div class="body">
+            <h3>Family Support</h3>
+            <p>Direct help for families who suddenly lose their primary earners or face hardship.</p>
+          </div>
+          <div class="foot"><span class="muted">Support</span><a class="btn" href="#donate">Donate</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DONATE -->
+    <section id="donate" class="section">
+      <h2>Donate</h2>
+      <div class="donate-panel">
+        <div class="panel">
+          <h4>Donate for Life</h4>
+          <p class="muted">Choose any amount and currency — we'll convert and send funds to the receiver in INR.</p>
+          <p style="margin-top:8px">Click donate to choose amount & currency.</p>
+          <div style="margin-top:12px">
+            <a id="openDonatePopup" class="btn" href="#">Donate Now</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4>About donations</h4>
+          <p class="muted">We accept worldwide payments via PayPal. Funds are converted to INR for the receiver. For high volumes, contact us for professional payout options.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:18px; color:var(--muted); font-size:14px">
+        <strong>Note:</strong> This site uses an estimated supporters counter for display. Actual donations are processed by PayPal and will be recorded securely.
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © <span id="year"></span> Global Relief • Honest payouts • Verified campaigns
+  </footer>
+
+  <!-- Donate popup -->
+  <div id="donateBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">
+    <div class="modal" role="document">
+      <h3>Donate for Life</h3>
+      <div style="margin-top:8px" class="muted">Enter amount and choose currency. You will be redirected to PayPal to complete payment.</div>
+
+      <div style="margin-top:12px" class="form-row">
+        <input id="donationAmount" type="number" min="1" placeholder="Amount (e.g. 500)" />
+        <select id="donationCurrency">
+          <option value="INR">INR - ₹</option>
+          <option value="USD">USD - $</option>
+          <option value="EUR">EUR - €</option>
+          <option value="GBP">GBP - £</option>
+          <option value="AED">AED - د.إ</option>
+          <option value="AUD">AUD - $</option>
+          <option value="CAD">CAD - $</option>
+        </select>
+      </div>
+
+      <div class="actions">
+        <button id="cancelDonate" class="secondary">Cancel</button>
+        <button id="proceedPaypal" class="btn">Proceed to PayPal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Celebration area (patake + blast + message) -->
+  <div class="celebrate-wrap" id="celebrateWrap">
+    <img class="left-fire" id="leftFire" src="data:image/svg+xml;utf8,
+      <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><circle cx='80' cy='80' r='70' fill='%23ffcf66'/></svg>" alt="">
+    <img class="right-fire" id="rightFire" src="data:image/svg+xml;utf8,
+      <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><circle cx='80' cy='80' r='70' fill='%23ff7b7b'/></svg>" alt="">
+    <img class="center-blast" id="centerBlast" src="data:image/svg+xml;utf8,
+      <svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><g><circle cx='130' cy='130' r='110' fill='%23ffd54f' opacity='0.95'/></g></svg>" alt="">
+  </div>
+
+  <div class="celebrate-msg" id="celebrateMsg">
+    <h2>🎉 Congratulations!</h2>
+    <p id="celebrateText">Thank you for saving someone's life with your kind donation.</p>
+    <div style="margin-top:12px"><button id="closeCelebrate" class="btn">Continue</button></div>
+  </div>
+
+  <!-- confetti canvas -->
+  <canvas id="confCanvas" style="position:fixed;pointer-events:none;inset:0;z-index:1500;display:none"></canvas>
+
+  <script>
+    // config (replace if needed)
+    const PAYPAL_EMAIL = encodeURIComponent('vanshsharma248417@gmail.com'); // your paypal email
+    const RETURN_AFTER_SECONDS = 1.5; // how long to wait before showing confirm prompt (demo)
+
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // open donate popup
+    const donateBackdrop = document.getElementById('donateBackdrop');
+    document.getElementById('openDonatePopup').addEventListener('click', function(e){
+      e.preventDefault();
+      donateBackdrop.style.display = 'flex';
+      donateBackdrop.setAttribute('aria-hidden','false');
+    });
+    document.getElementById('cancelDonate').addEventListener('click', function(){ donateBackdrop.style.display='none'; });
+
+    // proceed to PayPal
+    document.getElementById('proceedPaypal').addEventListener('click', function(){
+      const amount = Number(document.getElementById('donationAmount').value);
+      const currency = document.getElementById('donationCurrency').value || 'INR';
+      if(!amount || amount <= 0){ alert('Enter a valid amount'); return; }
+
+      // Build PayPal donate link:
+      // Using PayPal donate endpoint with business param & currency & amount
+      // Note: PayPal may convert automatically to INR for receiver.
+      const paypalLink = `https://www.paypal.com/donate?business=${PAYPAL_EMAIL}&currency_code=${currency}&amount=${encodeURIComponent(amount)}`;
+
+      // open PayPal in new tab
+      window.open(paypalLink, '_blank');
+
+      // close popup
+      donateBackdrop.style.display = 'none';
+
+      // show a small confirmation prompt to user: once they complete payment, they can press "I PAID"
+      setTimeout(()=> {
+        const confirmed = confirm('After completing payment on PayPal, press OK to show the thank-you celebration. If you did not complete payment, press Cancel.');
+        if(confirmed){
+          celebrateSuccess();
+        } else {
+          alert('If you complete the payment later, click the "Donate Now" button and then press OK after payment.');
+        }
+      }, RETURN_AFTER_SECONDS * 1000);
+    });
+
+    // ---------- Celebration (patake + center blast + confetti)
