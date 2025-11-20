@@ -1,0 +1,307 @@
+<!DOCTYPE html>  <html lang="en">    <head>        <meta charset="utf-8" />      
+  <meta name="viewport" content="width=device-width,initial-scale=1" />      
+  <title>Global Relief • Donate for Life</title>      
+  <style>      
+    :root{      
+      --accent:#0376c6;      
+      --muted:#6b7280;      
+      --card:#ffffff;      
+      --bg:linear-gradient(180deg,#f3f7fb 0%, #eef6fb 100%);      
+    }      
+    *{box-sizing:border-box}      
+    body{      
+      margin:0; font-family:Inter,system-ui,Roboto,Arial; background:var(--bg); color:#07203a;      
+    }      
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04);position:sticky;top:0;z-index:60}      
+    .brand{font-weight:800;color:var(--accent)}      
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block}      
+    .container{max-width:980px;margin:18px auto;padding:0 14px}  /* HERO */      
+.hero{display:flex;gap:18px;align-items:center;background-image:      
+  linear-gradient(180deg, rgba(3,118,198,0.48), rgba(3,118,198,0.18)),      
+  url('https://images.unsplash.com/photo-1506812574058-fc75fa93fead?auto=format&fit=crop&w=1500&q=60');      
+  background-size:cover;background-position:center;border-radius:12px;color:#fff;padding:30px}      
+.hero h1{margin:0;font-size:22px}      
+.hero p{margin:8px 0 0;color:rgba(255,255,255,0.95);max-width:680px}    /* counter - centered and sticky top */  
+.top-counter{  
+position:fixed;left:50%;transform:translateX(-50%);top:76px;z-index:70;  
+background:rgba(255,255,255,0.95);padding:8px 14px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,0.08);display:flex;gap:10px;align-items:center;font-weight:700;  
+}  
+.top-counter .label{font-weight:600;color:var(--muted);font-size:12px}  
+.top-counter .num{color:var(--accent);font-size:18px}  /* grid cards */
+.section{margin-top:120px}
+.section h2{color:var(--accent);margin:6px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card{background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(2,44,76,0.06);display:flex;flex-direction:column}
+.card img{width:100%;height:150px;object-fit:cover}
+.card .body{padding:12px}
+.card .foot{padding:12px;border-top:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center}
+
+/* donate panel */
+.donate-panel{margin-top:22px;display:flex;gap:16px;flex-wrap:wrap}
+.panel{flex:1 1 320px;background:var(--card);border-radius:10px;padding:16px;box-shadow:0 6px 18px rgba(2,44,76,0.06)}
+.muted{color:var(--muted);font-size:14px}
+
+/* modal */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,20,40,0.45);z-index:200;align-items:center;justify-content:center}
+.modal{width:94%;max-width:520px;background:#fff;border-radius:12px;padding:18px;box-shadow:0 12px 28px rgba(2,20,40,0.22)}
+.form-row{display:flex;gap:8px;align-items:center;margin-top:10px}
+.form-row input,.form-row select{flex:1;padding:10px;border-radius:8px;border:1px solid #e6eef7;font-size:15px}
+
+/* celebration */
+.celebrate-wrap{display:none;position:fixed;inset:0;z-index:1000;pointer-events:none}
+.left-fire,.right-fire{position:absolute;top:50%;width:180px;height:180px;opacity:0;filter:drop-shadow(0 8px 18px rgba(0,0,0,0.25))}
+.left-fire{left:8%}
+.right-fire{right:8%}
+.center-blast{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);width:260px;height:260px;opacity:0}
+.celebrate-msg{position:fixed;left:50%;top:58%;transform:translate(-50%,-50%);background:rgba(255,255,255,0.98);padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(2,20,40,0.18);text-align:center;z-index:1001;display:none}
+
+/* confetti */
+canvas{position:fixed;pointer-events:none;inset:0;z-index:1500;display:none}
+
+@media(max-width:680px){
+.hero{padding:18px}
+.top-counter{top:92px}
+}
+
+  </style>      
+</head>      
+<body>    <header>      
+    <div class="brand">Global Relief • Donate for Life</div>      
+    <nav>      
+      <a class="btn" href="#donate" id="ctaTop">Donate</a>      
+    </nav>      
+  </header>    <!-- centered live counter (estimated) -->    <div class="top-counter" id="topCounter">      
+    <div class="label">Estimated supporters today</div>      
+    <div class="num" id="counterNum">5,200+</div>      
+  </div>    <main class="container">      
+    <section class="hero" role="banner">      
+      <div>      
+        <h1>Fast help for disasters, medical emergencies & the environment</h1>      
+        <p>We provide immediate support to families affected by incidents, fund medical care, and plant trees to restore habitats.</p>      
+      </div>      
+    </section>  <section class="section" id="causes">      
+  <h2>What we support</h2>      
+  <div class="grid">      
+    <div class="card">      
+      <img src="https://images.unsplash.com/photo-1506169894395-36397e4aaee5?auto=format&fit=crop&w=900&q=60" alt="Disaster">      
+      <div class="body"><h3>Disaster Relief</h3><p>Food, shelter and rebuilding after floods, storms and earthquakes.</p></div>      
+      <div class="foot"><span class="muted">Immediate help</span><a class="btn donateBtn" href="#donate">Donate</a></div>      
+    </div>    <div class="card">      
+  <img src="https://images.unsplash.com/photo-1581349480963-0f5501a0b8e2?auto=format&fit=crop&w=900&q=60" alt="Incident">      
+  <div class="body"><h3>Attack & Incident Support</h3><p>Support for victims and families affected by sudden incidents.</p></div>      
+  <div class="foot"><span class="muted">Family aid</span><a class="btn donateBtn" href="#donate">Donate</a></div>      
+</div>      <div class="card">      
+  <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=60" alt="Trees">      
+  <div class="body"><h3>Tree Plantation</h3><p>Planting and protecting trees to restore habitats and cool communities.</p></div>      
+  <div class="foot"><span class="muted">Environment</span><a class="btn donateBtn" href="#donate">Donate</a></div>      
+</div>      <div class="card">      
+  <img src="https://images.unsplash.com/photo-1580281658629-82aea3c51e7b?auto=format&fit=crop&w=900&q=60" alt="Medical">      
+  <div class="body"><h3>Medical Emergencies</h3><p>Help for life-saving treatment when families cannot pay medical bills.</p></div>      
+  <div class="foot"><span class="muted">Health</span><a class="btn donateBtn" href="#donate">Donate</a></div>      
+</div>      <div class="card">      
+  <img src="https://images.unsplash.com/photo-1493836512294-502baa1986e2?auto=format&fit=crop&w=900&q=60" alt="Family">      
+  <div class="body"><h3>Family Support</h3><p>Direct help for families who suddenly lose their primary earners or face hardship.</p></div>      
+  <div class="foot"><span class="muted">Support</span><a class="btn donateBtn" href="#donate">Donate</a></div>      
+</div>    </div>      
+</section>    <section id="donate" class="section">      
+  <h2>Donate</h2>      
+  <div class="donate-panel">      
+    <div class="panel">      
+      <h4>Donate for Life</h4>      
+      <p class="muted">Choose amount & currency. International donors use PayPal; India donors can use UPI.</p>      
+      <div style="margin-top:12px"><a id="openDonatePopup" class="btn" href="#">Donate Now</a></div>      
+    </div>      
+    <div class="panel">      
+      <h4>About donations</h4>      
+      <p class="muted">Funds are received in INR. For large donations contact us for professional payout options.</p>      
+    </div>      
+  </div>      
+</section>    </main>    <footer style="margin-top:26px;padding:18px 0;text-align:center;color:#fff;background:var(--accent)">© <span id="year"></span> Global Relief • Honest payouts</footer>    <!-- Donate modal -->    <div id="donateBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">      
+    <div class="modal" role="document">      
+      <h3>Donate for Life</h3>      
+      <p class="muted">Enter amount and choose currency. Then select payment method.</p>  <div class="form-row">      
+    <input id="donationAmount" type="number" min="1" placeholder="Amount (e.g. 500)" />      
+    <select id="donationCurrency">      
+      <option value="INR">INR - ₹</option>      
+      <option value="USD">USD - $</option>      
+      <option value="EUR">EUR - €</option>      
+      <option value="GBP">GBP - £</option>      
+      <option value="AED">AED - د.إ</option>      
+      <option value="AUD">AUD - $</option>      
+      <option value="CAD">CAD - $</option>      
+    </select>      
+  </div>      <div style="margin-top:10px">      
+    <button id="payWithPaypal" class="btn">Pay with PayPal</button>      
+    <button id="payWithUpi" class="btn" style="background:#20a2a0;margin-left:8px">Pay with UPI</button>      
+  </div>      <div style="margin-top:12px" class="actions">      
+    <button id="cancelDonate" class="secondary">Cancel</button>      
+  </div>      
+</div>    </div>    <!-- UPI modal (shows QR and upi deep link) -->    <div id="upiBackdrop" class="modal-backdrop" role="dialog" aria-hidden="true">      
+    <div class="modal" role="document">      
+      <h3>Pay via UPI</h3>      
+      <p class="muted">Scan QR or open UPI app to pay. Make sure you enter the same amount.</p>      
+      <!-- QR image generated dynamically -->      
+      <div style="text-align:center;margin-top:10px">      
+        <img id="upiQr" src="" alt="UPI QR" style="width:180px;height:180px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.06)" />      
+      </div>      
+      <div style="margin-top:10px;text-align:center">      
+        <div class="muted">UPI ID: <strong id="upiIdText">vanshsharma248417-1@okaxis</strong></div>      
+        <div style="margin-top:8px"><a id="openUpiLink" class="btn" href="#">Open in UPI app</a></div>      
+      </div>      
+      <div style="margin-top:12px" class="actions">      
+        <button id="closeUpi" class="secondary">Close</button>      
+      </div>      
+    </div>      
+  </div>    <!-- Celebration area -->    <div class="celebrate-wrap" id="celebrateWrap">      
+    <img class="left-fire" id="leftFire" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><circle cx='90' cy='90' r='80' fill='%23ffcf66'/></svg>" alt="">      
+    <img class="right-fire" id="rightFire" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><circle cx='90' cy='90' r='80' fill='%23ff7b7b'/></svg>" alt="">      
+    <img class="center-blast" id="centerBlast" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><g><circle cx='130' cy='130' r='110' fill='%23ffd54f' opacity='0.95'/></g></svg>" alt="">      
+  </div>    <div class="celebrate-msg" id="celebrateMsg">      
+    <h2>🎉 Congratulations!</h2>      
+    <p id="celebrateText">Thank you for saving someone's life with your kind donation.</p>      
+    <div style="margin-top:12px"><button id="closeCelebrate" class="btn">Continue</button></div>      
+  </div>  <canvas id="confCanvas"></canvas>    <script>      
+    // ---------- CONFIG ----------      
+    const PAYPAL_EMAIL = encodeURIComponent('vanshsharma248417@gmail.com'); // receiver email      
+    const UPI_ID = 'vanshsharma248417-1@okaxis'; // your UPI ID      
+    // QR generator (public service) - encodes upi deep link into image      
+    function upiQrUrl(upiId, amount){      
+      const upi = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=Global%20Relief&am=${encodeURIComponent(amount)}&cu=INR`;      
+      return 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(upi);      
+    }      // ---------- UI refs ----------      
+document.getElementById('year').textContent = new Date().getFullYear();      
+const donateBackdrop = document.getElementById('donateBackdrop');      
+const upiBackdrop = document.getElementById('upiBackdrop');      
+  
+// open popup      
+document.getElementById('openDonatePopup').addEventListener('click', e => {      
+  e.preventDefault();      
+  donateBackdrop.style.display = 'flex';      
+  donateBackdrop.setAttribute('aria-hidden','false');      
+});      
+document.getElementById('cancelDonate').addEventListener('click', ()=> donateBackdrop.style.display='none');      
+  
+// all donate buttons open popup      
+document.querySelectorAll('.donateBtn').forEach(b=>{      
+  b.addEventListener('click', e=>{      
+    e.preventDefault();      
+    donateBackdrop.style.display='flex';      
+  });      
+});      
+document.getElementById('ctaTop').addEventListener('click', e=>{      
+  e.preventDefault();      
+  donateBackdrop.style.display='flex';      
+  window.location.hash = '#donate';      
+});      
+  
+// PayPal flow      
+document.getElementById('payWithPaypal').addEventListener('click', ()=>{      
+  const amount = Number(document.getElementById('donationAmount').value);      
+  const currency = document.getElementById('donationCurrency').value || 'INR';      
+  if(!amount || amount <= 0){ alert('Enter a valid amount'); return; }      
+  
+  // open PayPal donate link (business = email) - reliable server-side param      
+  // PayPal donate endpoint:      
+  const paypalLink = `https://www.paypal.com/donate?business=${PAYPAL_EMAIL}&currency_code=${currency}&amount=${encodeURIComponent(amount)}`;      
+  window.open(paypalLink, '_blank');      
+  
+  donateBackdrop.style.display='none';      
+  
+  // After small delay ask user to confirm (since client-side can't auto-verify)      
+  setTimeout(()=> {      
+    const ok = confirm('When you complete payment on PayPal, press OK to show the thank-you celebration.');      
+    if(ok) doCelebrate();      
+    else alert('If you paid later, press Donate & then OK after payment to celebrate.');      
+  }, 1200);      
+});      
+  
+// UPI flow      
+document.getElementById('payWithUpi').addEventListener('click', ()=>{      
+  const amount = Number(document.getElementById('donationAmount').value);      
+  if(!amount || amount <= 0){ alert('Enter a valid amount'); return; }      
+  // set QR & open modal      
+  document.getElementById('upiQr').src = upiQrUrl(UPI_ID, amount);      
+  document.getElementById('upiIdText').textContent = UPI_ID;      
+  // deep link for mobile apps      
+  const upiDeep = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=Global%20Relief&am=${encodeURIComponent(amount)}&cu=INR`;      
+  document.getElementById('openUpiLink').href = upiDeep;      
+  document.getElementById('openUpiLink').onclick = function(e){ /* mobile will handle */ };      
+  upiBackdrop.style.display = 'flex';      
+});      
+document.getElementById('closeUpi').addEventListener('click', ()=> upiBackdrop.style.display='none');      
+  
+// Celebration function (fireworks + confetti + message)      
+const celebrateWrap = document.getElementById('celebrateWrap');      
+const leftFire = document.getElementById('leftFire');      
+const rightFire = document.getElementById('rightFire');      
+const centerBlast = document.getElementById('centerBlast');      
+const celebrateMsg = document.getElementById('celebrateMsg');      
+const confCanvas = document.getElementById('confCanvas');      
+let confTimer = null, confPieces = [];      
+  
+function doCelebrate(){      
+  // show elements      
+  celebrateWrap.style.display='block';      
+  celebrateMsg.style.display='block';      
+  confCanvas.style.display='block';      
+  resizeCanvas(); createConfetti();      
+  confTimer = setInterval(drawConfetti, 30);      
+  
+  // animate in      
+  leftFire.style.opacity=0; rightFire.style.opacity=0; centerBlast.style.opacity=0;      
+  leftFire.style.transform='translateY(-40px) scale(0.8)'; rightFire.style.transform='translateY(-40px) scale(0.8)'; centerBlast.style.transform='translate(-50%,-50%) scale(0.8)';      
+  setTimeout(()=>{ leftFire.style.transition='all 600ms'; leftFire.style.opacity=1; leftFire.style.transform='translateY(0) scale(1)'; }, 120);      
+  setTimeout(()=>{ rightFire.style.transition='all 700ms'; rightFire.style.opacity=1; rightFire.style.transform='translateY(0) scale(1)'; }, 220);      
+  setTimeout(()=>{ centerBlast.style.transition='all 800ms'; centerBlast.style.opacity=1; centerBlast.style.transform='translate(-50%,-50%) scale(1)'; }, 320);      
+}      
+  
+document.getElementById('closeCelebrate').addEventListener('click', ()=>{      
+  // stop confetti and hide      
+  clearInterval(confTimer);      
+  confCanvas.style.display='none';      
+  celebrateMsg.style.display='none';      
+  celebrateWrap.style.display='none';      
+});      
+  
+// simple confetti      
+const ctx = confCanvas.getContext && confCanvas.getContext('2d');      
+function resizeCanvas(){ confCanvas.width = window.innerWidth; confCanvas.height = window.innerHeight; }      
+function createConfetti(){      
+  confPieces = [];      
+  for(let i=0;i<120;i++){      
+    confPieces.push({ x: Math.random()*confCanvas.width, y: Math.random()*-confCanvas.height, r: Math.random()*6+4, color: ['#ff5a5f','#ffb400','#4CAF50','#0288d1','#9b59b6'][Math.floor(Math.random()*5)], speed: 2+Math.random()*4, d: Math.random()*40 });      
+  }      
+}      
+function drawConfetti(){      
+  if(!ctx) return;      
+  ctx.clearRect(0,0,confCanvas.width, confCanvas.height);      
+  confPieces.forEach(p=>{      
+    ctx.fillStyle = p.color;      
+    ctx.fillRect(p.x, p.y, p.r, p.r*0.6);      
+    p.x += Math.sin(p.d) + 1 + Math.random()*2;      
+    p.y += p.speed + Math.random()*2;      
+    p.d += 0.03;      
+    if(p.y > confCanvas.height){ p.y = -10; p.x = Math.random()*confCanvas.width; }      
+  });      
+}      
+window.addEventListener('resize', resizeCanvas);      
+  
+// Estimated supporters counter (centered)      
+const counterEl = document.getElementById('counterNum');      
+let cnt = 5200;      
+counterEl.textContent = cnt.toLocaleString() + '+';      
+setInterval(()=>{      
+  const inc = Math.random() < 0.8 ? Math.floor(Math.random()*3) : Math.floor(Math.random()*12);      
+  cnt += inc;      
+  counterEl.textContent = cnt.toLocaleString() + '+';      
+}, 3500);      
+  
+// small: allow pressing Enter to submit amount      
+document.getElementById('donationAmount').addEventListener('keypress', (e)=>{ if(e.key==='Enter'){ document.getElementById('payWithPaypal').click(); } });      
+  
+// ensure any anchor to #donate opens popup      
+document.querySelectorAll('a[href="#donate"]').forEach(a=> a.addEventListener('click', (e)=>{ e.preventDefault(); donateBackdrop.style.display='flex'; }));
+
+  </script>    
+  </body>     
+  </html> 
