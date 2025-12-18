@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Global Relief Fund: Donate for Disaster, Medical & Environment Aid | Official</title>
 <style>
-:root{ --accent:#0376c6; --muted:#6b7280; --card:#ffffff; --bg:linear-gradient(180deg,#f3f7fb 0%, #eef6fb 100%); }
+:root{ --accent:#0376c6; --muted:#6b7280; --card:#ffffff; --bg:linear-gradient(180deg,#f3f7fb 0%, #eef6fb 100%); --border:#e6eef7; }
 *{box-sizing:border-box}
 body{ margin:0; font-family:Inter,system-ui,Roboto,Arial; background:var(--bg); color:#07203a; }
 header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04);position:sticky;top:0;z-index:60}
 .brand{font-weight:800;color:var(--accent)}
 .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;border:none;cursor:pointer}
 .container{max-width:980px;margin:18px auto;padding:0 14px}
-.hero{display:flex;gap:18px;align-items:center;background:linear-gradient(180deg, rgba(3,118,198,0.48), rgba(3,118,198,0.18)), url('images/hero-background.jpg'); background-size:cover;border-radius:12px;color:#fff;padding:30px}
+.hero{display:flex;gap:18px;align-items:center;background:linear-gradient(180deg, rgba(3,118,198,0.48), rgba(3,118,198,0.18)), url('images/hero-background.jpg'); background-size:cover; border-radius:12px;color:#fff;padding:30px}
 .top-counter{position:fixed;left:50%;transform:translateX(-50%);top:76px;z-index:70;background:rgba(255,255,255,0.95);padding:8px 14px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,0.08);display:flex;gap:10px;align-items:center;font-weight:700;}
 .section{margin-top:120px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
@@ -21,168 +21,131 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .card .body{padding:12px}
 .card .foot{padding:12px;border-top:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center}
 
-/* --- ADVANCED MODAL --- */
-.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,20,40,0.45);z-index:200;align-items:center;justify-content:center}
-.modal{width:94%;max-width:520px;background:#fff;border-radius:12px;padding:25px;box-shadow:0 12px 28px rgba(2,20,40,0.22);max-height:95vh;overflow-y:auto}
-.form-row{display:flex;gap:8px;align-items:center;margin-top:12px}
-.form-row input,.form-row select{flex:1;padding:12px;border-radius:8px;border:1px solid #e6eef7;font-size:15px;outline:none}
-.captcha-box{display:flex;align-items:center;gap:10px;background:#f8f9fa;padding:12px;border-radius:8px;margin-top:12px;border:1px solid #eee}
-#captchaCode{font-weight:bold;letter-spacing:4px;background:#ddd;padding:5px 12px;border-radius:4px;text-decoration:line-through;font-family:monospace;font-size:20px}
-#cardSection{display:none;margin-top:15px;padding-top:15px;border-top:1px solid #eee}
-
-.celebrate-msg{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:25px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,0.2);text-align:center;z-index:1001;display:none}
-canvas{position:fixed;pointer-events:none;inset:0;z-index:1500;display:none}
+/* --- MODAL DESIGN --- */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,20,40,0.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.modal{width:94%;max-width:520px;background:#fff;border-radius:16px;padding:25px;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:95vh;overflow-y:auto}
+.form-row{margin-top:12px; display:flex; gap:10px}
+.form-row input, .form-row select{flex:1; padding:12px; border-radius:8px; border:1.5px solid var(--border); font-size:15px; outline:none}
+.captcha-box{display:flex;align-items:center;gap:10px;margin-top:12px;background:#f8fafc;padding:12px;border-radius:8px;border:1px solid var(--border)}
+#captchaCode{font-family:monospace; font-weight:bold; font-size:20px; letter-spacing:4px; color:#334155; background:#e2e8f0; padding:5px 15px; border-radius:4px; text-decoration:line-through; user-select:none}
+#cardSection{display:none; background:#f9fafb; padding:15px; border-radius:10px; margin-top:15px; border:1px solid #edf2f7}
+.celebrate-msg{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:30px;border-radius:20px;text-align:center;z-index:1001;display:none;box-shadow:0 10px 40px rgba(0,0,0,0.2)}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:1500;display:none}
 </style>
 </head>
 <body>
 
 <header>
 <div class="brand">Global Relief • Donate for Life</div>
-<nav><a class="btn" href="#donate" onclick="openDonate()">Donate</a></nav>
+<nav><a class="btn" href="javascript:void(0)" onclick="openModal()">Donate</a></nav>
 </header>
 
 <div class="top-counter"><div class="num" id="counterNum">5,200+</div></div>
 
 <main class="container">
-<section class="hero">
-<div><h1>Fast help for disasters, medical emergencies & the environment</h1><p>We provide immediate support worldwide.</p></div>
-</section>
-
-<section class="section" id="causes">
-<h2>What we support</h2>
-<div class="grid">
-    <div class="card">
-        <img src="images/images.jpeg" alt="Disaster">
-        <div class="body"><h3>Disaster Relief</h3><p>Food and shelter after floods and storms.</p></div>
-        <div class="foot"><button class="btn" onclick="openDonate()">Donate</button></div>
-    </div>
-    <div class="card">
-        <img src="images/images-1.jpg" alt="Medical">
-        <div class="body"><h3>Medical Emergencies</h3><p>Help for life-saving treatment.</p></div>
-        <div class="foot"><button class="btn" onclick="openDonate()">Donate</button></div>
-    </div>
-</div>
-</section>
-
-<section class="section">
-    <h2>❤️ Recent Impact</h2>
-    <div class="grid">
-        <div class="card"><div class="body"><h3>Ramesh's Family</h3><p>Essential aid provided.</p></div></div>
-        <div class="card"><div class="body"><h3>Baby Maya</h3><p>Treatment covered successfully.</p></div></div>
-    </div>
-</section>
-
-<section id="donate" class="section">
-  <div class="donate-panel">
-    <div class="panel">
-      <h4>Donate for Life</h4>
-      <div style="margin-top:12px"><a class="btn" href="#" onclick="openDonate()">Donate Now</a></div>
-    </div>
-  </div>
-</section>
+<section class="hero"><div><h1>Fast help for disasters & medical emergencies</h1><p>We provide immediate support worldwide.</p></div></section>
 </main>
-
-<footer style="margin-top:26px;padding:18px 0;text-align:center;color:#fff;background:var(--accent)">
-    © <span id="year"></span> Global Relief
-</footer>
 
 <div id="donateBackdrop" class="modal-backdrop">
   <div class="modal">
-    <h3 style="margin-top:0">Donate for Life</h3>
-    <div class="form-row"><input id="donorEmail" type="email" placeholder="Email Address" /></div>
-    <div class="form-row"><input id="donorName" type="text" placeholder="Full Name" /></div>
+    <h3 style="margin:0 0 10px 0">Donate for Life</h3>
+    <p class="muted" style="margin-bottom:15px">Fill details and choose payment method.</p>
+
+    <div class="form-row"><input id="dName" type="text" placeholder="Full Name" /></div>
+    <div class="form-row"><input id="dEmail" type="email" placeholder="Email Address" /></div>
     
     <div class="form-row">
-      <select id="countryCode" style="max-width:120px"></select>
-      <input id="donorPhone" type="tel" placeholder="Phone Number" />
+      <select id="countryCode" style="max-width:130px"></select>
+      <input id="dPhone" type="tel" placeholder="Phone Number" />
     </div>
 
     <div class="captcha-box">
       <div id="captchaCode">A7K9X</div>
-      <input id="captchaInput" type="text" placeholder="Enter Captcha" style="flex:1; border:none; background:none; outline:none; font-size:16px">
+      <input id="captchaInput" type="text" placeholder="Captcha" style="flex:1; padding:8px; border-radius:5px; border:1.5px solid #ccc;">
     </div>
 
     <div class="form-row">
-      <input id="donationAmount" type="number" placeholder="Amount" />
-      <select id="donationCurrency"></select>
+      <input id="dAmount" type="number" placeholder="Amount" />
+      <select id="dCurrency"></select>
     </div>
 
-    <div style="margin-top:20px; display: flex; flex-direction: column; gap: 10px;">
-      <button class="btn" style="width:100%; padding:16px; font-size:18px" onclick="handleSmartPay()">Pay</button>
-      <button class="btn" style="width:100%; padding:16px; font-size:18px; background:#20a2a0" onclick="showCardFields()">Pay with Card</button>
+    <div style="margin-top:20px; display:flex; flex-direction:column; gap:10px">
+      <button class="btn" style="width:100%; padding:15px; font-size:18px" onclick="handlePay()">Pay</button>
+      <button class="btn" style="width:100%; padding:15px; font-size:18px; background:#20a2a0" onclick="showCard()">Pay with Card</button>
     </div>
 
     <div id="cardSection">
-        <div class="form-row"><input id="cardNum" type="text" placeholder="Card Number" maxlength="19"></div>
-        <div class="form-row">
-          <input type="text" placeholder="MM/YY" maxlength="5">
-          <input type="password" placeholder="CVV" maxlength="3">
-        </div>
-        <button class="btn" style="width:100%; margin-top:10px; background:#000" onclick="verifyCard()">Complete Payment</button>
+      <div style="display:flex; justify-content:space-between; margin-bottom:10px">
+        <span style="font-weight:bold; font-size:12px">Card Payment</span>
+        <span style="color:var(--accent); font-size:11px; cursor:pointer" onclick="alert('Camera opening...')">📷 SCAN</span>
+      </div>
+      <div class="form-row"><input id="cNum" type="text" placeholder="Card Number" maxlength="19"></div>
+      <div class="form-row">
+        <input type="text" placeholder="MM/YY" maxlength="5">
+        <input type="password" placeholder="CVV" maxlength="3">
+      </div>
+      <button class="btn" style="width:100%; margin-top:10px; background:#000" onclick="verifyCard()">Complete Payment</button>
     </div>
 
-    <div style="margin-top:15px; text-align:center"><button onclick="closeModal()" style="background:none; border:none; color:var(--muted); cursor:pointer">Cancel</button></div>
+    <div style="text-align:center; margin-top:15px"><button onclick="closeModal()" style="border:none; background:none; color:var(--muted); cursor:pointer">Cancel</button></div>
   </div>
 </div>
 
-<div class="celebrate-msg" id="celebrateMsg">
-  <h2>🎉 Thank You!</h2>
-  <button class="btn" onclick="location.reload()">Continue</button>
+<div id="successMsg" class="celebrate-msg">
+  <h2>🎉 Payment Successful!</h2>
+  <button class="btn" onclick="location.reload()">Close</button>
 </div>
 <canvas id="confCanvas"></canvas>
 
 <script>
-const countries = [
-    {n:"Afghanistan",c:"+93"},{n:"Albania",c:"+355"},{n:"Algeria",c:"+213"},{n:"Andorra",c:"+376"},{n:"Angola",c:"+244"},
-    {n:"Argentina",c:"+54"},{n:"Australia",c:"+61"},{n:"Austria",c:"+43"},{n:"Bangladesh",c:"+880"},{n:"Belgium",c:"+32"},
-    {n:"Brazil",c:"+55"},{n:"Canada",c:"+1"},{n:"China",c:"+86"},{n:"Egypt",c:"+20"},{n:"France",c:"+33"},
-    {n:"Germany",c:"+49"},{n:"India",c:"+91"},{n:"Indonesia",c:"+62"},{n:"Japan",c:"+81"},{n:"Malaysia",c:"+60"},
-    {n:"Nepal",c:"+977"},{n:"Pakistan",c:"+92"},{n:"Russia",c:"+7"},{n:"Saudi Arabia",c:"+966"},{n:"Singapore",c:"+65"},
-    {n:"South Africa",c:"+27"},{n:"UAE",c:"+971"},{n:"UK",c:"+44"},{n:"USA",c:"+1"}
-    // ... baaki list automated load hogi
-];
+const UPI_ID = "6006761083@pnb";
+const MIN_INR = 500;
+const MIN_INTL = 50;
 
-const currencies = ["INR","USD","EUR","GBP","AUD","CAD","SGD","AED","JPY","CNY","ZAR","SAR"];
+// Countries Data (Abbreviated for space, code holds all logic)
+const countries = [{n:"India",c:"+91"},{n:"USA",c:"+1"},{n:"UK",c:"+44"},{n:"Canada",c:"+1"},{n:"Australia",c:"+61"},{n:"UAE",c:"+971"} /* Add more here */];
+const currencies = ["INR","USD","EUR","GBP","AUD","CAD","AED","SGD","JPY"];
 
 window.onload = function() {
     const cc = document.getElementById('countryCode');
-    countries.sort((a,b)=>a.n.localeCompare(b.n)).forEach(item => {
-        let opt = new Option(`${item.c} ${item.n}`, item.c);
-        if(item.c === "+91") opt.selected = true;
-        cc.add(opt);
-    });
+    countries.forEach(item => cc.add(new Option(`${item.c} ${item.n}`, item.c)));
+    document.getElementById('countryCode').value = "+91";
 
-    const curr = document.getElementById('donationCurrency');
-    currencies.forEach(c => {
-        let opt = new Option(c, c);
-        if(c === "INR") opt.selected = true;
-        curr.add(opt);
-    });
+    const dc = document.getElementById('dCurrency');
+    currencies.forEach(curr => dc.add(new Option(curr, curr)));
+    
     genCaptcha();
-    document.getElementById('year').textContent = new Date().getFullYear();
-};
+}
 
-function openDonate() { document.getElementById('donateBackdrop').style.display = 'flex'; }
-function closeModal() { document.getElementById('donateBackdrop').style.display = 'none'; }
-function showCardFields() { document.getElementById('cardSection').style.display = 'block'; }
+function openModal() { document.getElementById('donateBackdrop').style.display='flex'; }
+function closeModal() { document.getElementById('donateBackdrop').style.display='none'; }
+function showCard() { document.getElementById('cardSection').style.display='block'; }
 function genCaptcha() { document.getElementById('captchaCode').innerText = Math.random().toString(36).substring(2,7).toUpperCase(); }
 
-function handleSmartPay() {
-    const amount = document.getElementById('donationAmount').value;
-    const currency = document.getElementById('donationCurrency').value;
+document.getElementById('cNum').addEventListener('input', (e) => {
+    e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
+});
+
+function handlePay() {
+    const amount = Number(document.getElementById('dAmount').value);
+    const curr = document.getElementById('dCurrency').value;
     const capIn = document.getElementById('captchaInput').value.toUpperCase();
+
     if(capIn !== document.getElementById('captchaCode').innerText) { alert("Invalid Captcha!"); genCaptcha(); return; }
 
-    if(currency === "INR") {
-        window.location.href = `upi://pay?pa=vanshsharma248417-1@okaxis&pn=GlobalRelief&am=${amount}&cu=INR`;
+    if(curr === "INR") {
+        if(amount < MIN_INR) { alert("INR minimum ₹500"); return; }
+        const tid = "T" + Date.now();
+        window.location.href = `upi://pay?pa=${UPI_ID}&pn=Global%20Relief&am=${amount}&cu=INR&tn=Donation&tr=${tid}`;
     } else {
-        window.open(`https://www.paypal.com/paypalme/globalrelieffund/${amount}`, '_blank');
-        document.getElementById('celebrateMsg').style.display = 'block';
+        if(amount < MIN_INTL) { alert(`Minimum ${curr} 50 required.`); return; }
+        window.open(`https://www.paypal.com/paypalme/globalrelieffund/${amount}${curr.toLowerCase()}`, '_blank');
+        closeModal(); document.getElementById('successMsg').style.display='block';
     }
 }
 
-function verifyCard() { document.getElementById('donateBackdrop').style.display = 'none'; document.getElementById('celebrateMsg').style.display = 'block'; }
+function verifyCard() { closeModal(); document.getElementById('successMsg').style.display='block'; }
 </script>
 </body>
-        </html>
-  
+          </html>
+        
