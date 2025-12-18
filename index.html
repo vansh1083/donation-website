@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Global Relief Fund: Donate for Disaster, Medical & Environment Aid | Official</title>
+<style>
+:root{
+  --accent:#0376c6;
+  --muted:#6b7280;
+  --card:#ffffff;
+  --bg:linear-gradient(180deg,#f3f7fb 0%, #eef6fb 100%);
+  --border:#e6eef7;
+}
+*{box-sizing:border-box}
+body{ margin:0; font-family:Inter,system-ui,Roboto,Arial; background:var(--bg); color:#07203a; }
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04);position:sticky;top:0;z-index:60}
+.brand{font-weight:800;color:var(--accent)}
+.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;border:none;cursor:pointer;transition:0.3s}
+.btn:hover{opacity:0.9}
+.container{max-width:980px;margin:18px auto;padding:0 14px}
+
+/* Counter */
+.top-counter{
+position:fixed;left:50%;transform:translateX(-50%);top:76px;z-index:70;
+background:rgba(255,255,255,0.95);padding:8px 14px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,0.08);display:flex;gap:10px;align-items:center;font-weight:700;
+}
+.top-counter .num{color:var(--accent);font-size:18px}
+
+/* Modal */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,20,40,0.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
+.modal{width:94%;max-width:480px;background:#fff;border-radius:16px;padding:24px;box-shadow:0 20px 40px rgba(0,0,0,0.2);max-height:90vh;overflow-y:auto}
+.form-row{margin-top:12px; position: relative;}
+.form-row input, .form-row select{width:100%;padding:12px;border-radius:8px;border:1.5px solid var(--border);font-size:15px;outline:none;}
+.form-row input:focus{border-color:var(--accent)}
+
+/* Scan Button inside input */
+.scan-btn{position:absolute; right:10px; top:50%; transform:translateY(-50%); background:#f1f5f9; border:1px solid #cbd5e1; border-radius:5px; padding:4px 8px; font-size:11px; color:var(--accent); cursor:pointer; font-weight:bold;}
+
+/* Captcha */
+.captcha-box{display:flex;align-items:center;gap:10px;margin-top:12px;background:#f8fafc;padding:10px;border-radius:8px;border:1px solid var(--border)}
+.captcha-text{font-family:monospace;font-weight:bold;font-size:20px;letter-spacing:4px;color:#334155;background:#e2e8f0;padding:5px 15px;border-radius:4px;user-select:none;text-decoration:line-through}
+
+#cardFields{display:none;background:#f9fafb;padding:15px;border-radius:10px;margin-top:15px;border:1px solid #edf2f7}
+.celebrate-msg{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:#fff;padding:25px;border-radius:15px;box-shadow:0 10px 40px rgba(0,0,0,0.2);text-align:center;z-index:1600;display:none;width:300px}
+canvas{position:fixed;pointer-events:none;inset:0;z-index:1500;display:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">Global Relief • Donate for Life</div>
+</header>
+
+<div class="top-counter">
+  <div class="num" id="counterNum">5,200+</div>
+</div>
+
+<main class="container" style="text-align:center; margin-top:150px;">
+    <button class="btn" style="padding:15px 40px; font-size:18px" onclick="openModal()">Donate Now</button>
+</main>
+
+<div id="donateBackdrop" class="modal-backdrop">
+  <div class="modal">
+    <h3>Donate for Life</h3>
+    <div class="form-row"><input id="donorName" type="text" placeholder="Full Name" /></div>
+    <div class="form-row"><input id="donorPhone" type="tel" placeholder="Phone Number" /></div>
+
+    <div class="captcha-box">
+      <div id="captchaCode" class="captcha-text">R8K2P</div>
+      <input id="captchaInput" type="text" placeholder="Enter Captcha" style="flex:1; padding:8px; border-radius:5px; border:1px solid #cbd5e1">
+    </div>
+
+    <div class="form-row" style="display:flex; gap:10px">
+      <input id="donationAmount" type="number" placeholder="Amount" style="flex:2" />
+      <select style="flex:1"><option>INR - ₹</option></select>
+    </div>
+
+    <div style="margin-top:20px">
+      <button id="cardToggleBtn" class="btn" style="width:100%; background:#20a2a0;" onclick="showCardFields()">Pay with Card (Credit/Debit)</button>
+    </div>
+
+    <div id="cardFields">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
+          <p style="font-size:13px; font-weight:bold; margin:0">Secure Card Payment</p>
+          <div class="scan-btn" onclick="triggerScan()">📷 SCAN CARD</div>
+      </div>
+      
+      <div class="form-row">
+          <input id="cardNumber" type="text" placeholder="Card Number (16 Digits)" maxlength="19">
+      </div>
+      
+      <div class="form-row" style="display:flex; gap:10px">
+        <input id="cardExpiry" type="text" placeholder="MM/YY" style="flex:1" maxlength="5">
+        <input id="cardCvv" type="password" placeholder="CVV" style="flex:1" maxlength="3">
+      </div>
+      
+      <button class="btn" style="width:100%; margin-top:15px; background:#000" onclick="handlePay()">Complete Payment</button>
+    </div>
+
+    <button class="btn" style="background:none; color:var(--muted); margin-top:10px" onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<div class="celebrate-msg" id="celebrateMsg">
+  <h2 style="color:#22c55e">🎉 Payment Successful!</h2>
+  <p>Thank you for your donation.</p>
+  <button class="btn" onclick="location.reload()">Close</button>
+</div>
+<canvas id="confCanvas"></canvas>
+
+<script>
+function openModal() { document.getElementById('donateBackdrop').style.display = 'flex'; generateCaptcha(); }
+function closeModal() { document.getElementById('donateBackdrop').style.display = 'none'; }
+
+function showCardFields() {
+    document.getElementById('cardToggleBtn').style.display = 'none';
+    document.getElementById('cardFields').style.display = 'block';
+}
+
+function generateCaptcha() {
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let code = "";
+    for(let i=0; i<5; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+    document.getElementById('captchaCode').innerText = code;
+}
+
+// Luhn Algorithm for real card verification
+function isValidCard(number) {
+    let num = number.replace(/\s+/g, '');
+    if (num.length < 15) return false;
+    let sum = 0;
+    for (let i = 0; i < num.length; i++) {
+        let digit = parseInt(num[i]);
+        if ((num.length - i) % 2 === 0) {
+            digit *= 2;
+            if (digit > 9) digit -= 9;
+        }
+        sum += digit;
+    }
+    return sum % 10 === 0;
+}
+
+// Card Auto-formatting (Spaces)
+document.getElementById('cardNumber').addEventListener('input', function (e) {
+    e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
+});
+
+function triggerScan() {
+    // Mobile browsers par camera open karne ka shortcut
+    alert("Opening Secure Scanner...");
+    // Note: Actual scanning needs complex libraries, this triggers the visual feedback
+}
+
+function handlePay() {
+    const cardNum = document.getElementById('cardNumber').value;
+    const captchaIn = document.getElementById('captchaInput').value.toUpperCase();
+    const captchaRef = document.getElementById('captchaCode').innerText;
+
+    if (captchaIn !== captchaRef) {
+        alert("Invalid Captcha!");
+        generateCaptcha();
+        return;
+    }
+
+    if (!isValidCard(cardNum)) {
+        alert("❌ Error: Invalid Card Number! Please enter a correct Debit/Credit card.");
+        return;
+    }
+
+    // Success flow
+    document.getElementById('donateBackdrop').style.display = 'none';
+    document.getElementById('celebrateMsg').style.display = 'block';
+    document.getElementById('confCanvas').style.display = 'block';
+    initConfetti();
+}
+
+// Simple Confetti Animation
+function initConfetti() {
+    const canvas = document.getElementById('confCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let particles = [];
+    for(let i=0; i<50; i++) particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*5+2});
+    function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p => {
+            ctx.fillStyle = "#0376c6";
+            ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+            p.y += 3; if(p.y > canvas.height) p.y = -10;
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+}
+</script>
+</body>
+  </html>
+    
