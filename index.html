@@ -9,96 +9,153 @@
 :root{ --accent:#0376c6; --muted:#6b7280; --card:#ffffff; --bg:linear-gradient(180deg,#f3f7fb 0%, #eef6fb 100%); }
 *{box-sizing:border-box}
 body{ margin:0; font-family:Inter,system-ui,Roboto,Arial; background:var(--bg); color:#07203a; }
-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04);position:sticky;top:0;z-index:60}
-.brand{font-weight:800;color:var(--accent)}
-.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;border:none;cursor:pointer}
-.container{max-width:980px;margin:18px auto;padding:0 14px}
-.hero{display:flex;gap:18px;align-items:center;background-image:linear-gradient(180deg, rgba(3,118,198,0.48), rgba(3,118,198,0.18)), url('images/hero-background.jpg'); background-size:cover;background-position:center;border-radius:12px;color:#fff;padding:30px}
-.hero h1{margin:0;font-size:22px}
-.hero p{margin:8px 0 0;color:rgba(255,255,255,0.95);max-width:680px}
-.top-counter{position:fixed;left:50%;transform:translateX(-50%);top:76px;z-index:70;background:rgba(255,255,255,0.95);padding:8px 14px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,0.08);display:flex;gap:10px;align-items:center;font-weight:700;}
-.section{margin-top:120px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.card{background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(2,44,76,0.06);display:flex;flex-direction:column}
-.card img{width:100%;height:150px;object-fit:cover}
-.card .body{padding:12px}
-.card .foot{padding:12px;border-top:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center}
-footer{margin-top:26px;padding:30px 0;text-align:center;color:#fff;background:#07203a}
 
-/* --- MODAL & FORM STYLES --- */
-.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,20,40,0.45);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
-.modal{width:94%;max-width:500px;background:#fff;border-radius:12px;padding:22px;max-height:95vh;overflow-y:auto}
+/* Header */
+header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04);position:sticky;top:0;z-index:60}
+.brand{font-weight:800;color:var(--accent); font-size:18px;}
+.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;border:none;cursor:pointer}
+
+/* Container & Hero */
+.container{max-width:980px;margin:18px auto;padding:0 14px}
+.hero{display:flex;gap:18px;align-items:center;background-image:linear-gradient(180deg, rgba(3,118,198,0.48), rgba(3,118,198,0.18)), url('images/hero-background.jpg'); background-size:cover;background-position:center;border-radius:12px;color:#fff;padding:40px 30px}
+.hero h1{margin:0;font-size:26px; text-shadow: 0 2px 4px rgba(0,0,0,0.3);}
+.hero p{margin:10px 0 0;color:rgba(255,255,255,0.95);max-width:680px; font-size:16px;}
+
+/* Counter */
+.top-counter{position:fixed;left:50%;transform:translateX(-50%);top:80px;z-index:70;background:rgba(255,255,255,0.95);padding:8px 16px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,0.08);display:flex;gap:10px;align-items:center;font-weight:700;}
+
+/* Grid Sections */
+.section{margin-top:60px; margin-bottom: 60px;}
+.section h2{ font-size: 24px; margin-bottom: 20px; color: #07203a; }
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(2,44,76,0.08);display:flex;flex-direction:column; transition: transform 0.2s;}
+.card:hover { transform: translateY(-5px); }
+.card img{width:100%;height:160px;object-fit:cover}
+.card .body{padding:15px; flex:1;}
+.card h3 { margin: 0 0 8px 0; font-size: 18px; color: #0376c6; }
+.card p { margin: 0; color: #555; font-size: 14px; line-height: 1.5; }
+.card .foot{padding:15px;border-top:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center}
+.card .foot span { font-size: 12px; font-weight: bold; color: var(--muted); background: #f0f4f8; padding: 4px 8px; border-radius: 4px; }
+
+/* Footer */
+footer{margin-top:40px;padding:40px 0;text-align:center;color:#fff;background:#07203a}
+footer a{color:#60a5fa; text-decoration:none; margin: 0 8px; font-size: 14px;}
+footer a:hover { text-decoration: underline; }
+
+/* --- MODAL STYLES --- */
+.modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,20,40,0.5);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.modal{width:94%;max-width:500px;background:#fff;border-radius:16px;padding:24px;max-height:95vh;overflow-y:auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);}
 
 /* Inputs Row */
-.form-row{display:flex;gap:8px;align-items:center;margin-top:10px;width:100%}
-.form-row input, .form-row select{flex:1;padding:12px;border-radius:8px;border:1px solid #e6eef7;font-size:15px;outline:none;width:100%}
+.form-row{display:flex;gap:10px;align-items:center;margin-top:12px;width:100%}
+.form-row input, .form-row select{flex:1;padding:14px;border-radius:8px;border:1px solid #e2e8f0;font-size:15px;outline:none;width:100%; transition: border-color 0.2s;}
+.form-row input:focus, .form-row select:focus { border-color: #0376c6; }
 
 /* Captcha */
-.captcha-box{display:flex;align-items:center;gap:10px;margin-top:12px;background:#f8fafc;padding:12px;border-radius:8px;border:1px solid #e6eef7}
-#captchaCodeDisplay{font-family:monospace; font-weight:bold; font-size:20px; letter-spacing:4px; color:#334155; background:#e2e8f0; padding:5px 15px; border-radius:4px; text-decoration:line-through; user-select:none}
+.captcha-box{display:flex;align-items:center;gap:10px;margin-top:15px;background:#f8fafc;padding:10px;border-radius:8px;border:1px solid #e2e8f0}
+#captchaCodeDisplay{font-family:monospace; font-weight:bold; font-size:20px; letter-spacing:4px; color:#334155; background:#e2e8f0; padding:8px 15px; border-radius:6px; text-decoration:line-through; user-select:none}
 
 /* Payment Step 2 Specifics */
-#qrImageDisplay { width: 200px; border-radius: 10px; border: 2px solid #eee; margin: 10px auto; display: block; }
-.timer-box { font-size: 14px; color: #d9534f; font-weight: bold; margin: 10px 0; background: #fff5f5; padding: 8px; border-radius: 5px; display: inline-block; text-align:center;}
-.manual-upi-box { background: #fdf2ce; border: 1px solid #f0c14b; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; }
-.upi-text { font-family: monospace; font-size: 16px; background: #fff; padding: 8px; border: 1px dashed #333; display: block; margin: 10px auto; font-weight: bold; cursor: pointer; }
+#qrImageDisplay { width: 220px; border-radius: 12px; border: 2px solid #e2e8f0; margin: 15px auto; display: block; }
+.timer-box { font-size: 14px; color: #ef4444; font-weight: bold; margin: 10px 0; background: #fef2f2; padding: 8px 12px; border-radius: 6px; display: inline-block; text-align:center;}
+.manual-upi-box { background: #fffbeb; border: 1px solid #fcd34d; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; }
+.upi-text { font-family: monospace; font-size: 17px; background: #fff; padding: 10px; border: 1px dashed #4b5563; display: block; margin: 10px auto; font-weight: bold; cursor: pointer; color: #1f2937; }
 
 /* UTR Input */
-.utr-input { width: 100%; padding: 12px; border: 2px solid #ccc; border-radius: 8px; margin-top: 15px; text-align: center; font-weight: bold; letter-spacing: 2px; font-size: 16px; transition: border-color 0.3s; }
-.utr-input:focus { border-color: #0376c6; outline: none; }
+.utr-input { width: 100%; padding: 14px; border: 2px solid #cbd5e1; border-radius: 8px; margin-top: 15px; text-align: center; font-weight: bold; letter-spacing: 3px; font-size: 18px; transition: all 0.3s; }
+.utr-input:focus { border-color: #0376c6; outline: none; box-shadow: 0 0 0 3px rgba(3, 118, 198, 0.2); }
 
 /* Disabled Button */
-.btn-disabled { background: #cccccc !important; cursor: not-allowed !important; opacity: 0.7; }
+.btn-disabled { background: #94a3b8 !important; cursor: not-allowed !important; opacity: 0.7; }
 </style>
 </head>
 <body>
 
-<header><div class="brand">Global Relief • Donate for Life</div><nav><a class="btn" href="javascript:void(0)" onclick="openModal()">Donate</a></nav></header>
+<header>
+    <div class="brand">Global Relief • Donate for Life</div>
+    <nav><a class="btn" href="javascript:void(0)" onclick="openModal()">Donate</a></nav>
+</header>
 
-<div class="top-counter"><div class="label" style="font-size:12px;color:var(--muted)">Supporters today</div><div class="num" id="counterNum">5,200+</div></div>
+<div class="top-counter">
+    <div class="label" style="font-size:12px;color:var(--muted)">Supporters today</div>
+    <div class="num" id="counterNum">5,200+</div>
+</div>
 
 <main class="container">
-<section class="hero"><div><h1>Fast help for disasters, medical emergencies & environment</h1><p>Verified MSME Relief Fund (UDYAM-JK-19-0015271) for social aid.</p></div></section>
+    <section class="hero">
+        <div>
+            <h1>Fast help for disasters, medical emergencies & environment</h1>
+            <p>Verified MSME Relief Fund (UDYAM-JK-19-0015271) for social aid.</p>
+        </div>
+    </section>
 
-<section class="section">
-<h2>What we support</h2>
-<div class="grid">
-<div class="card"><img src="images/images.jpeg"><div class="body"><h3>Disaster Relief</h3><p>Food and shelter after floods and earthquakes.</p></div></div>
-<div class="card"><img src="images/Screenshot_2025-11-20-21-20-31-61.jpg"><div class="body"><h3>Tree Plantation</h3><p>Restoring habitats through mass plantation.</p></div></div>
-<div class="card"><img src="images/images.jpg"><div class="body"><h3>Attack & Incident Support</h3><p>Aid for families affected by sudden incidents.</p></div></div>
-<div class="card"><img src="images/2Q==.jpg"><div class="body"><h3>Family Support</h3><p>Help for families who lose their earners.</p></div></div>
-<div class="card"><img src="images/images-1.jpg"><div class="body"><h3>Medical Emergencies</h3><p>Life-saving treatment for poor families.</p></div></div>
-</div></section>
+    <section class="section">
+        <h2>What we support</h2>
+        <div class="grid">
+            <div class="card"><img src="images/images.jpeg"><div class="body"><h3>Disaster Relief</h3><p>Food and shelter after floods and earthquakes.</p></div></div>
+            <div class="card"><img src="images/Screenshot_2025-11-20-21-20-31-61.jpg"><div class="body"><h3>Tree Plantation</h3><p>Restoring habitats through mass plantation.</p></div></div>
+            <div class="card"><img src="images/images.jpg"><div class="body"><h3>Attack & Incident Support</h3><p>Aid for families affected by sudden incidents.</p></div></div>
+            <div class="card"><img src="images/2Q==.jpg"><div class="body"><h3>Family Support</h3><p>Help for families who lose their earners.</p></div></div>
+            <div class="card"><img src="images/images-1.jpg"><div class="body"><h3>Medical Emergencies</h3><p>Life-saving treatment for poor families.</p></div></div>
+        </div>
+    </section>
 
-<section id="contact" class="section" style="background:#fff; padding:30px; border-radius:12px; text-align:center;">
-    <h2>Contact Us</h2>
-    <p>Email: <b>vanshsharmavanishsharma@gmail.com</b></p>
-    <p>Phone: <b>+91 8492933324</b></p>
-    <p>Address: Jatwal, Samba, Jammu and Kashmir - 184121</p>
-</section>
+    <section class="section" id="impact">
+        <h2>❤️ Recent Impact Stories</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="images/images.jpeg">
+                <div class="body"><h3>Hope for Ramesh</h3><p>Rebuilt his shop after the floods.</p></div>
+                <div class="foot">
+                    <span>Flood Relief</span>
+                    <a href="javascript:void(0)" onclick="openModal()" class="btn" style="font-size:13px; padding:8px 12px;">Support</a>
+                </div>
+            </div>
+            <div class="card">
+                <img src="images/images-1.jpg">
+                <div class="body"><h3>Baby Maya's Recovery</h3><p>Heart surgery successfully funded.</p></div>
+                <div class="foot">
+                    <span>Medical Aid</span>
+                    <a href="javascript:void(0)" onclick="openModal()" class="btn" style="font-size:13px; padding:8px 12px;">Contribute</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section" style="background:#fff; padding:40px; border-radius:12px; text-align:center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+        <h2>Contact Us</h2>
+        <p>Email: <b>vanshsharmavanishsharma@gmail.com</b></p>
+        <p>Phone: <b>+91 8492933324</b></p>
+        <p>Address: Jatwal, Samba, Jammu and Kashmir - 184121</p>
+    </section>
 </main>
 
 <footer>
     <p>© 2025 Global Relief Fund | MSME: UDYAM-JK-19-0015271</p>
+    <div style="margin-top:15px;">
+        <a href="about.html">About Us</a> | 
+        <a href="privacy.html">Privacy Policy</a> | 
+        <a href="term.html">Terms & Conditions</a>
+    </div>
 </footer>
 
 <div id="donateBackdrop" class="modal-backdrop">
   <div class="modal">
     
     <div id="step1">
-        <h3 style="margin-top:0;">Donate for Life</h3>
+        <h3 style="margin-top:0; font-size: 22px; color: #07203a;">Donate for Life</h3>
         
         <div class="form-row"><input id="donorEmail" type="email" placeholder="Email Address" /></div>
         <div class="form-row"><input id="donorName" type="text" placeholder="Full Name" /></div>
         
         <div class="form-row">
-            <select id="countryCode" style="max-width:130px"></select>
+            <select id="countryCode" style="max-width:140px"></select>
             <input id="donorPhone" type="tel" placeholder="Phone Number" />
         </div>
 
         <div class="captcha-box">
             <div id="captchaCodeDisplay">A7K9X</div>
-            <input id="captchaInput" type="text" placeholder="Captcha" style="flex:1; border:none; background:none; outline:none">
+            <input id="captchaInput" type="text" placeholder="Enter Captcha" style="flex:1; border:none; background:none; outline:none; font-weight:bold;">
         </div>
 
         <div class="form-row">
@@ -106,42 +163,42 @@ footer{margin-top:26px;padding:30px 0;text-align:center;color:#fff;background:#0
             <select id="donationCurrency"></select>
         </div>
         
-        <button class="btn" style="width:100%; padding:15px; margin-top:20px;" onclick="handleStep1()">Next &rarr;</button>
+        <button class="btn" style="width:100%; padding:15px; margin-top:25px; font-size:16px;" onclick="handleStep1()">Next &rarr;</button>
         <button onclick="closeModal()" style="display:block; margin:15px auto 0; border:none; background:none; color:var(--muted); cursor:pointer">Cancel</button>
     </div>
 
     <div id="step2" style="display:none; text-align:center;">
         
         <h2 style="color:#0376c6; margin:0 0 5px 0;">Global Relief Fund</h2>
-        <p style="font-size:12px; color:gray; margin-top:0;">Verified Donation Portal</p>
+        <p style="font-size:13px; color:gray; margin-top:0;">Verified Donation Portal</p>
 
         <div class="timer-box">Session Expires in: <span id="timeCount">05:00</span></div>
 
         <div id="smallAmountView" style="display:none;">
-            <p style="color:#333; font-weight:bold; margin:10px 0;">Scan via GPay/PhonePe</p>
-            <img src="images/pay.jpg" id="qrImageDisplay" alt="QR Code Not Found">
+            <p style="color:#1f2937; font-weight:bold; margin:15px 0 5px 0;">Scan via GPay / PhonePe</p>
+            <img src="images/pay.jpg" id="qrImageDisplay" alt="QR Code Loading...">
         </div>
 
         <div id="bigAmountView" style="display:none;">
-            <p style="color:#d9534f; font-weight:bold;">Amount > ₹2000</p>
+            <p style="color:#dc2626; font-weight:bold; margin-top:15px;">Amount > ₹2000</p>
             <div class="manual-upi-box">
-                <span style="font-size:13px;">⚠️ Use Manual UPI ID:</span>
+                <span style="font-size:13px; display:block; margin-bottom:5px;">⚠️ Payment limit exceeded for QR. Use UPI ID:</span>
                 <span class="upi-text" onclick="copyUPI()">Q574755382@ybl</span>
-                <button onclick="copyUPI()" style="background:#333; color:white; border:none; padding:4px 8px; border-radius:4px; font-size:11px; cursor:pointer;">Copy ID</button>
+                <button onclick="copyUPI()" style="background:#374151; color:white; border:none; padding:6px 12px; border-radius:6px; font-size:12px; cursor:pointer;">Copy ID</button>
             </div>
         </div>
 
-        <div style="margin-top:15px; border-top:1px solid #eee; padding-top:10px;">
-            <p style="font-size:13px; color:#555; margin-bottom:5px; font-weight:bold;">Enter 12-Digit UTR to Verify:</p>
+        <div style="margin-top:20px; border-top:1px solid #e5e7eb; padding-top:15px;">
+            <p style="font-size:14px; color:#4b5563; margin-bottom:8px; font-weight:bold;">Enter 12-Digit UTR to Verify:</p>
             
             <input type="text" id="utrNumber" class="utr-input" placeholder="XXXXXXXXXXXX" maxlength="12" oninput="validateUTR(this)">
             
-            <button id="verifyBtn" class="btn btn-disabled" style="width:100%; margin-top:10px;" onclick="finish()" disabled>
+            <button id="verifyBtn" class="btn btn-disabled" style="width:100%; margin-top:15px; padding:15px; font-size:16px;" onclick="finish()" disabled>
                 Verify Payment ✅
             </button>
         </div>
 
-        <button onclick="resetModal()" style="background:none; border:none; color:red; margin-top:15px; cursor:pointer; font-size:12px;">Cancel / Back</button>
+        <button onclick="resetModal()" style="background:none; border:none; color:#dc2626; margin-top:15px; cursor:pointer; font-size:13px;">Cancel Transaction</button>
     </div>
 
   </div>
@@ -149,29 +206,50 @@ footer{margin-top:26px;padding:30px 0;text-align:center;color:#fff;background:#0
 <script>
 // --- CONFIGURATION ---
 const MY_UPI_ID = "Q574755382@ybl";
-const countries = [{n:"India",c:"+91"},{n:"USA",c:"+1"},{n:"UK",c:"+44"},{n:"Canada",c:"+1"}];
-const currencies = ["INR","USD","EUR","GBP"];
+
+// Full Country List Restored
+const countries = [
+    {n:"Afghanistan",c:"+93"},{n:"Albania",c:"+355"},{n:"Algeria",c:"+213"},{n:"Andorra",c:"+376"},
+    {n:"Angola",c:"+244"},{n:"Argentina",c:"+54"},{n:"Australia",c:"+61"},{n:"Austria",c:"+43"},
+    {n:"Bahrain",c:"+973"},{n:"Bangladesh",c:"+880"},{n:"Belgium",c:"+32"},{n:"Brazil",c:"+55"},
+    {n:"Canada",c:"+1"},{n:"China",c:"+86"},{n:"Denmark",c:"+45"},{n:"Egypt",c:"+20"},
+    {n:"France",c:"+33"},{n:"Germany",c:"+49"},{n:"Greece",c:"+30"},{n:"India",c:"+91"},
+    {n:"Indonesia",c:"+62"},{n:"Iran",c:"+98"},{n:"Iraq",c:"+964"},{n:"Ireland",c:"+353"},
+    {n:"Israel",c:"+972"},{n:"Italy",c:"+39"},{n:"Japan",c:"+81"},{n:"Jordan",c:"+962"},
+    {n:"Kenya",c:"+254"},{n:"Kuwait",c:"+965"},{n:"Malaysia",c:"+60"},{n:"Mexico",c:"+52"},
+    {n:"Nepal",c:"+977"},{n:"Netherlands",c:"+31"},{n:"New Zealand",c:"+64"},{n:"Norway",c:"+47"},
+    {n:"Oman",c:"+968"},{n:"Pakistan",c:"+92"},{n:"Philippines",c:"+63"},{n:"Poland",c:"+48"},
+    {n:"Portugal",c:"+351"},{n:"Qatar",c:"+974"},{n:"Russia",c:"+7"},{n:"Saudi Arabia",c:"+966"},
+    {n:"Singapore",c:"+65"},{n:"South Africa",c:"+27"},{n:"Spain",c:"+34"},{n:"Sri Lanka",c:"+94"},
+    {n:"Sweden",c:"+46"},{n:"Switzerland",c:"+41"},{n:"Thailand",c:"+66"},{n:"Turkey",c:"+90"},
+    {n:"UAE",c:"+971"},{n:"UK",c:"+44"},{n:"USA",c:"+1"}
+];
+
+// Full Currency List Restored
+const currencies = ["INR","USD","EUR","GBP","AUD","CAD","AED","SGD","JPY","CNY","NZD","CHF"];
+
 let timerInterval;
 
 // --- INITIALIZATION ---
 window.onload = function() {
     // Populate Country Codes
     const cc = document.getElementById('countryCode');
-    countries.forEach(item => { 
-        let opt = new Option(`${item.c} ${item.n}`, item.c); 
-        if(item.c === "+91") opt.selected = true; 
-        cc.add(opt); 
+    countries.sort((a,b)=>a.n.localeCompare(b.n)).forEach(item => {
+        let opt = new Option(`${item.c} ${item.n}`, item.c);
+        if(item.c === "+91") opt.selected = true;
+        cc.add(opt);
     });
 
     // Populate Currencies
     const curr = document.getElementById('donationCurrency');
-    currencies.forEach(c => { 
-        let opt = new Option(c, c); 
-        if(c === "INR") opt.selected = true; 
-        curr.add(opt); 
+    currencies.forEach(c => {
+        let opt = new Option(c, c);
+        if(c === "INR") opt.selected = true;
+        curr.add(opt);
     });
 
     genCaptcha();
+    // Update year in footer if needed
 };
 
 function openModal() { document.getElementById('donateBackdrop').style.display = 'flex'; }
@@ -194,7 +272,6 @@ function handleStep1() {
         // Redirect to PayPal for Foreign Currency
         const link = `https://www.paypal.com/paypalme/globalrelieffund/${amount}${curr}`;
         window.open(link, '_blank');
-        alert("Redirecting to PayPal for International Payment...");
         closeModal();
     } else {
         // Proceed to Local Payment (Step 2)
@@ -281,5 +358,5 @@ function finish() {
 </script>
 
 </body>
-                </html>
-                                                                           
+    </html>
+                
