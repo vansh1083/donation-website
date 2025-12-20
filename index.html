@@ -3,87 +3,114 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Global Relief Fund: Donate for Disaster & Medical Aid</title>
+<title>Global Relief Fund: Donate for Disaster, Medical & Environment Aid | Official</title>
 <style>
-/* Basic Design */
-:root{ --accent:#0376c6; --bg:linear-gradient(180deg,#f3f7fb 0%, #eef6fb 100%); }
+/* --- BASIC DESIGN --- */
+:root{ --accent:#0376c6; --muted:#6b7280; --card:#ffffff; --bg:linear-gradient(180deg,#f3f7fb 0%, #eef6fb 100%); }
 *{box-sizing:border-box}
-body{ margin:0; font-family:Inter,system-ui,Arial; background:var(--bg); color:#07203a; }
+body{ margin:0; font-family:Inter,system-ui,Roboto,Arial; background:var(--bg); color:#07203a; }
 header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04);position:sticky;top:0;z-index:60}
 .brand{font-weight:800;color:var(--accent)}
 .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;border:none;cursor:pointer}
 .container{max-width:980px;margin:18px auto;padding:0 14px}
-.hero{display:flex;gap:18px;align-items:center;background:#0376c6; border-radius:12px;color:#fff;padding:30px}
-.section{margin-top:50px}
+.hero{display:flex;gap:18px;align-items:center;background-image:linear-gradient(180deg, rgba(3,118,198,0.48), rgba(3,118,198,0.18)), url('images/hero-background.jpg'); background-size:cover;background-position:center;border-radius:12px;color:#fff;padding:30px}
+.hero h1{margin:0;font-size:22px}
+.hero p{margin:8px 0 0;color:rgba(255,255,255,0.95);max-width:680px}
+.top-counter{position:fixed;left:50%;transform:translateX(-50%);top:76px;z-index:70;background:rgba(255,255,255,0.95);padding:8px 14px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,0.08);display:flex;gap:10px;align-items:center;font-weight:700;}
+.section{margin-top:120px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(2,44,76,0.06);display:flex;flex-direction:column}
+.card{background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(2,44,76,0.06);display:flex;flex-direction:column}
 .card img{width:100%;height:150px;object-fit:cover}
 .card .body{padding:12px}
 .card .foot{padding:12px;border-top:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center}
 footer{margin-top:26px;padding:30px 0;text-align:center;color:#fff;background:#07203a}
 
-/* Modal Styles */
+/* --- MODAL & FORM STYLES --- */
 .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(2,20,40,0.45);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
-.modal{width:94%;max-width:450px;background:#fff;border-radius:12px;padding:20px;max-height:95vh;overflow-y:auto; text-align:center;}
-.form-row{margin-top:10px;width:100%}
-.form-row input{width:100%;padding:12px;border-radius:8px;border:1px solid #e6eef7;font-size:15px;outline:none;}
-#qrImageDisplay { width: 220px; border-radius: 10px; border: 2px solid #eee; margin: 10px auto; display: block; }
+.modal{width:94%;max-width:500px;background:#fff;border-radius:12px;padding:22px;max-height:95vh;overflow-y:auto}
 
-/* Payment Specifics */
-.timer-box { font-size: 14px; color: #d9534f; font-weight: bold; margin: 10px 0; background: #fff5f5; padding: 8px; border-radius: 5px; display: inline-block;}
-.utr-input { width: 100%; padding: 12px; border: 2px solid #ccc; border-radius: 8px; margin-top: 15px; text-align: center; font-weight: bold; letter-spacing: 2px; font-size: 16px; transition: border-color 0.3s; }
-.utr-input:focus { border-color: #0376c6; outline: none; }
-.manual-upi-box { background: #fdf2ce; border: 1px solid #f0c14b; padding: 15px; border-radius: 8px; margin-top: 15px; }
+/* Inputs Row */
+.form-row{display:flex;gap:8px;align-items:center;margin-top:10px;width:100%}
+.form-row input, .form-row select{flex:1;padding:12px;border-radius:8px;border:1px solid #e6eef7;font-size:15px;outline:none;width:100%}
+
+/* Captcha */
+.captcha-box{display:flex;align-items:center;gap:10px;margin-top:12px;background:#f8fafc;padding:12px;border-radius:8px;border:1px solid #e6eef7}
+#captchaCodeDisplay{font-family:monospace; font-weight:bold; font-size:20px; letter-spacing:4px; color:#334155; background:#e2e8f0; padding:5px 15px; border-radius:4px; text-decoration:line-through; user-select:none}
+
+/* Payment Step 2 Specifics */
+#qrImageDisplay { width: 200px; border-radius: 10px; border: 2px solid #eee; margin: 10px auto; display: block; }
+.timer-box { font-size: 14px; color: #d9534f; font-weight: bold; margin: 10px 0; background: #fff5f5; padding: 8px; border-radius: 5px; display: inline-block; text-align:center;}
+.manual-upi-box { background: #fdf2ce; border: 1px solid #f0c14b; padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; }
 .upi-text { font-family: monospace; font-size: 16px; background: #fff; padding: 8px; border: 1px dashed #333; display: block; margin: 10px auto; font-weight: bold; cursor: pointer; }
 
-/* DISABLED BUTTON STYLE */
-.btn-disabled {
-    background: #cccccc !important;
-    cursor: not-allowed !important;
-    opacity: 0.7;
-}
+/* UTR Input */
+.utr-input { width: 100%; padding: 12px; border: 2px solid #ccc; border-radius: 8px; margin-top: 15px; text-align: center; font-weight: bold; letter-spacing: 2px; font-size: 16px; transition: border-color 0.3s; }
+.utr-input:focus { border-color: #0376c6; outline: none; }
+
+/* Disabled Button */
+.btn-disabled { background: #cccccc !important; cursor: not-allowed !important; opacity: 0.7; }
 </style>
 </head>
 <body>
 
-<header>
-    <div class="brand">Global Relief Fund</div>
-    <a class="btn" href="javascript:void(0)" onclick="openModal()">Donate Now</a>
-</header>
+<header><div class="brand">Global Relief • Donate for Life</div><nav><a class="btn" href="javascript:void(0)" onclick="openModal()">Donate</a></nav></header>
+
+<div class="top-counter"><div class="label" style="font-size:12px;color:var(--muted)">Supporters today</div><div class="num" id="counterNum">5,200+</div></div>
 
 <main class="container">
-    <section class="hero">
-        <div>
-            <h1>Emergency Relief & Support</h1>
-            <p>Verified MSME: UDYAM-JK-19-0015271</p>
-        </div>
-    </section>
+<section class="hero"><div><h1>Fast help for disasters, medical emergencies & environment</h1><p>Verified MSME Relief Fund (UDYAM-JK-19-0015271) for social aid.</p></div></section>
 
-    <section class="section">
-        <h2>Our Causes</h2>
-        <div class="grid">
-            <div class="card"><img src="images/images.jpeg"><div class="body"><h3>Disaster Relief</h3></div><div class="foot"><a href="javascript:void(0)" onclick="openModal()" class="btn">Donate</a></div></div>
-            <div class="card"><img src="images/images-1.jpg"><div class="body"><h3>Medical Aid</h3></div><div class="foot"><a href="javascript:void(0)" onclick="openModal()" class="btn">Donate</a></div></div>
-            <div class="card"><img src="images/2Q==.jpg"><div class="body"><h3>Family Support</h3></div><div class="foot"><a href="javascript:void(0)" onclick="openModal()" class="btn">Donate</a></div></div>
-        </div>
-    </section>
+<section class="section">
+<h2>What we support</h2>
+<div class="grid">
+<div class="card"><img src="images/images.jpeg"><div class="body"><h3>Disaster Relief</h3><p>Food and shelter after floods and earthquakes.</p></div></div>
+<div class="card"><img src="images/Screenshot_2025-11-20-21-20-31-61.jpg"><div class="body"><h3>Tree Plantation</h3><p>Restoring habitats through mass plantation.</p></div></div>
+<div class="card"><img src="images/images.jpg"><div class="body"><h3>Attack & Incident Support</h3><p>Aid for families affected by sudden incidents.</p></div></div>
+<div class="card"><img src="images/2Q==.jpg"><div class="body"><h3>Family Support</h3><p>Help for families who lose their earners.</p></div></div>
+<div class="card"><img src="images/images-1.jpg"><div class="body"><h3>Medical Emergencies</h3><p>Life-saving treatment for poor families.</p></div></div>
+</div></section>
+
+<section id="contact" class="section" style="background:#fff; padding:30px; border-radius:12px; text-align:center;">
+    <h2>Contact Us</h2>
+    <p>Email: <b>vanshsharmavanishsharma@gmail.com</b></p>
+    <p>Phone: <b>+91 8492933324</b></p>
+    <p>Address: Jatwal, Samba, Jammu and Kashmir - 184121</p>
+</section>
 </main>
 
 <footer>
-    <p>© 2025 Global Relief Fund</p>
+    <p>© 2025 Global Relief Fund | MSME: UDYAM-JK-19-0015271</p>
 </footer>
 
 <div id="donateBackdrop" class="modal-backdrop">
   <div class="modal">
     
     <div id="step1">
-        <h3 style="margin-top:0;">Donate to Save Lives</h3>
-        <div class="form-row"><input id="dName" type="text" placeholder="Your Name"></div>
-        <div class="form-row"><input id="dAmount" type="number" placeholder="Amount (e.g. 500)"></div>
-        <button class="btn" style="width:100%; margin-top:15px;" onclick="checkAmountAndShow()">Next &rarr;</button>
+        <h3 style="margin-top:0;">Donate for Life</h3>
+        
+        <div class="form-row"><input id="donorEmail" type="email" placeholder="Email Address" /></div>
+        <div class="form-row"><input id="donorName" type="text" placeholder="Full Name" /></div>
+        
+        <div class="form-row">
+            <select id="countryCode" style="max-width:130px"></select>
+            <input id="donorPhone" type="tel" placeholder="Phone Number" />
+        </div>
+
+        <div class="captcha-box">
+            <div id="captchaCodeDisplay">A7K9X</div>
+            <input id="captchaInput" type="text" placeholder="Captcha" style="flex:1; border:none; background:none; outline:none">
+        </div>
+
+        <div class="form-row">
+            <input id="donationAmount" type="number" placeholder="Amount (e.g. 500)" />
+            <select id="donationCurrency"></select>
+        </div>
+        
+        <button class="btn" style="width:100%; padding:15px; margin-top:20px;" onclick="handleStep1()">Next &rarr;</button>
+        <button onclick="closeModal()" style="display:block; margin:15px auto 0; border:none; background:none; color:var(--muted); cursor:pointer">Cancel</button>
     </div>
 
-    <div id="step2" style="display:none;">
+    <div id="step2" style="display:none; text-align:center;">
         
         <h2 style="color:#0376c6; margin:0 0 5px 0;">Global Relief Fund</h2>
         <p style="font-size:12px; color:gray; margin-top:0;">Verified Donation Portal</p>
@@ -92,8 +119,7 @@ footer{margin-top:26px;padding:30px 0;text-align:center;color:#fff;background:#0
 
         <div id="smallAmountView" style="display:none;">
             <p style="color:#333; font-weight:bold; margin:10px 0;">Scan via GPay/PhonePe</p>
-            
-            <img src="images/pay.jpg" id="qrImageDisplay" alt="QR Not Found">
+            <img src="images/pay.jpg" id="qrImageDisplay" alt="QR Code Not Found">
         </div>
 
         <div id="bigAmountView" style="display:none;">
@@ -115,108 +141,145 @@ footer{margin-top:26px;padding:30px 0;text-align:center;color:#fff;background:#0
             </button>
         </div>
 
-        <button onclick="resetModal()" style="background:none; border:none; color:red; margin-top:15px; cursor:pointer; font-size:12px;">Cancel Transaction</button>
+        <button onclick="resetModal()" style="background:none; border:none; color:red; margin-top:15px; cursor:pointer; font-size:12px;">Cancel / Back</button>
     </div>
+
   </div>
 </div>
-
 <script>
-    const MY_UPI_ID = "Q574755382@ybl";
-    let timerInterval;
+// --- CONFIGURATION ---
+const MY_UPI_ID = "Q574755382@ybl";
+const countries = [{n:"India",c:"+91"},{n:"USA",c:"+1"},{n:"UK",c:"+44"},{n:"Canada",c:"+1"}];
+const currencies = ["INR","USD","EUR","GBP"];
+let timerInterval;
 
-    function openModal() { 
-        document.getElementById('donateBackdrop').style.display = 'flex'; 
-        document.getElementById('step1').style.display = 'block';
-        document.getElementById('step2').style.display = 'none';
+// --- INITIALIZATION ---
+window.onload = function() {
+    // Populate Country Codes
+    const cc = document.getElementById('countryCode');
+    countries.forEach(item => { 
+        let opt = new Option(`${item.c} ${item.n}`, item.c); 
+        if(item.c === "+91") opt.selected = true; 
+        cc.add(opt); 
+    });
+
+    // Populate Currencies
+    const curr = document.getElementById('donationCurrency');
+    currencies.forEach(c => { 
+        let opt = new Option(c, c); 
+        if(c === "INR") opt.selected = true; 
+        curr.add(opt); 
+    });
+
+    genCaptcha();
+};
+
+function openModal() { document.getElementById('donateBackdrop').style.display = 'flex'; }
+function closeModal() { document.getElementById('donateBackdrop').style.display = 'none'; clearInterval(timerInterval); resetModal(); }
+function genCaptcha() { document.getElementById('captchaCodeDisplay').innerText = Math.random().toString(36).substring(2,7).toUpperCase(); }
+
+// --- STEP 1 LOGIC (Validation & Currency Check) ---
+function handleStep1() {
+    const amount = Number(document.getElementById('donationAmount').value);
+    const curr = document.getElementById('donationCurrency').value;
+    const capIn = document.getElementById('captchaInput').value.toUpperCase();
+    const capReal = document.getElementById('captchaCodeDisplay').innerText;
+
+    // 1. Basic Validation
+    if(amount < 1) { alert("Please enter valid amount"); return; }
+    if(capIn !== capReal) { alert("Invalid Captcha!"); genCaptcha(); return; }
+
+    // 2. Check Currency (PayPal vs INR)
+    if(curr !== "INR") {
+        // Redirect to PayPal for Foreign Currency
+        const link = `https://www.paypal.com/paypalme/globalrelieffund/${amount}${curr}`;
+        window.open(link, '_blank');
+        alert("Redirecting to PayPal for International Payment...");
+        closeModal();
+    } else {
+        // Proceed to Local Payment (Step 2)
+        showStep2(amount);
     }
+}
+
+// --- STEP 2 LOGIC (QR/UPI & UTR) ---
+function showStep2(amount) {
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'block';
+
+    // Reset UTR Input
+    const utrInput = document.getElementById('utrNumber');
+    utrInput.value = "";
+    validateUTR(utrInput); 
     
-    function closeModal() { 
-        document.getElementById('donateBackdrop').style.display = 'none'; 
-        clearInterval(timerInterval);
+    startTimer(300); // Start 5 min timer
+
+    // < 2000 vs > 2000 Logic
+    if(amount > 2000) {
+        document.getElementById('smallAmountView').style.display = 'none';
+        document.getElementById('bigAmountView').style.display = 'block';
+    } else {
+        document.getElementById('smallAmountView').style.display = 'block';
+        document.getElementById('bigAmountView').style.display = 'none';
     }
+}
 
-    function checkAmountAndShow() {
-        var amt = document.getElementById('dAmount').value;
-        if(amt < 1) { alert("Please enter amount"); return; }
+// --- UTR VALIDATION (12 Digits Only) ---
+function validateUTR(input) {
+    input.value = input.value.replace(/[^0-9]/g, ''); // Remove non-numbers
+    var val = input.value;
+    var btn = document.getElementById('verifyBtn');
 
-        document.getElementById('step1').style.display = 'none';
-        document.getElementById('step2').style.display = 'block';
+    if (val.length === 12) {
+        btn.disabled = false;
+        btn.classList.remove("btn-disabled"); 
+        btn.style.background = "#28a745"; 
+        input.style.borderColor = '#28a745';
+    } else {
+        btn.disabled = true;
+        btn.classList.add("btn-disabled");
+        btn.style.background = ""; 
+        input.style.borderColor = '#d9534f';
+    }
+}
 
-        // Reset
-        var utrInput = document.getElementById('utrNumber');
-        utrInput.value = "";
-        validateUTR(utrInput); 
-        
-        startTimer(300); // 5 Mins
+// --- UTILS ---
+function startTimer(duration) {
+    clearInterval(timerInterval);
+    var timer = duration, minutes, seconds;
+    var display = document.querySelector('#timeCount');
+    
+    timerInterval = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        display.textContent = minutes + ":" + seconds;
 
-        if(amt > 2000) {
-            document.getElementById('smallAmountView').style.display = 'none';
-            document.getElementById('bigAmountView').style.display = 'block';
-        } else {
-            document.getElementById('smallAmountView').style.display = 'block';
-            document.getElementById('bigAmountView').style.display = 'none';
+        if (--timer < 0) {
+            clearInterval(timerInterval);
+            alert("Session Expired");
+            resetModal();
         }
-    }
+    }, 1000);
+}
 
-    // BUTTON ENABLE LOGIC
-    function validateUTR(input) {
-        // Only allow numbers
-        input.value = input.value.replace(/[^0-9]/g, '');
-        var val = input.value;
-        var btn = document.getElementById('verifyBtn');
+function copyUPI() {
+    navigator.clipboard.writeText(MY_UPI_ID);
+    alert("UPI ID Copied!");
+}
 
-        if (val.length === 12) {
-            // Enable
-            btn.disabled = false;
-            btn.classList.remove("btn-disabled"); 
-            btn.style.background = "#28a745"; 
-            input.style.borderColor = '#28a745';
-        } else {
-            // Disable
-            btn.disabled = true;
-            btn.classList.add("btn-disabled");
-            btn.style.background = ""; 
-            input.style.borderColor = '#d9534f';
-        }
-    }
+function resetModal() {
+    document.getElementById('step1').style.display = 'block';
+    document.getElementById('step2').style.display = 'none';
+}
 
-    function startTimer(duration) {
-        clearInterval(timerInterval);
-        var timer = duration, minutes, seconds;
-        var display = document.querySelector('#timeCount');
-        
-        timerInterval = setInterval(function () {
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-            display.textContent = minutes + ":" + seconds;
-
-            if (--timer < 0) {
-                clearInterval(timerInterval);
-                alert("Session Expired");
-                resetModal();
-            }
-        }, 1000);
-    }
-
-    function copyUPI() {
-        navigator.clipboard.writeText(MY_UPI_ID);
-        alert("UPI ID Copied!");
-    }
-
-    function resetModal() {
-        clearInterval(timerInterval);
-        document.getElementById('step1').style.display = 'block';
-        document.getElementById('step2').style.display = 'none';
-    }
-
-    function finish() {
-        alert("Verification Successful! Donation Recorded. Thank you. 🙏");
-        location.reload();
-    }
+function finish() {
+    alert("Verification Successful! Donation Recorded. Thank you. 🙏");
+    location.reload();
+}
 </script>
 
 </body>
-                                  </html>
-                
+                </html>
+                                                                           
